@@ -15,11 +15,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Menu from './Menu';
 
-const logo = require('../images/logo.svg');
+const logo = require('../images/nl-logo.png');
 
 const styles = theme => ({
   appBar: {
-    position: 'relative',
+    position: 'sticky',
     boxShadow: 'none',
     borderBottom: `1px solid ${theme.palette.grey['100']}`,
     backgroundColor: 'white',
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
   productLogo: {
     display: 'inline-block',
-    borderLeft: `1px solid ${theme.palette.grey['A100']}`,
+    //borderLeft: `1px solid ${theme.palette.grey['A100']}`,
     marginLeft: 32,
     paddingLeft: 24,
     [theme.breakpoints.up('md')]: {
@@ -105,13 +105,13 @@ class Topbar extends Component {
     if(this.props.currentPath === '/home') {
       return 0
     }
-    if(this.props.currentPath === '/dashboard') {
+    if(this.props.currentPath === '/ourstory') {
       return 1
     }
-    if(this.props.currentPath === '/signup') {
+    if(this.props.currentPath === '/gallery') {
       return 2
     }
-    if(this.props.currentPath === '/wizard') {
+    if(this.props.currentPath === '/gigguide') {
       return 3
     }
     if(this.props.currentPath === '/cards') {
@@ -132,17 +132,14 @@ class Topbar extends Component {
                   <div className={classes.inline}>
                     <Typography variant="h6" color="inherit" noWrap>
                       <Link to='/' className={classes.link}>
-                        <img width={20} src={logo} alt="" />
-                        <span className={classes.tagline}>Material Sense</span>
+                        <img width={120} src={logo} alt="" />
                       </Link>
                     </Typography>
                   </div>
                   { !this.props.noTabs && (
                     <React.Fragment>
                       <div className={classes.productLogo}>
-                        <Typography>
-                          A material UI Template
-                        </Typography>
+                       
                       </div>
                       <div className={classes.iconContainer}>
                         <IconButton onClick={this.mobileMenuOpen} className={classes.iconButton} color="inherit" aria-label="Menu">

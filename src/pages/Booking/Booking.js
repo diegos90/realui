@@ -88,7 +88,7 @@ export default function Booking() {
   return (
     <React.Fragment>
     <CssBaseline />
-    <Topbar currentPath="/gigguide" />
+    <Topbar currentPath="/booknow" />
     <div className={classes.root}>
       <div className={classes.booking}>
       <Stepper activeStep={activeStep}>

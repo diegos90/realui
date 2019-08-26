@@ -18,6 +18,7 @@ export default props => (
           <Route exact path='/gigguide' component={ GigGuide } />
           <Route exact path='/booking' component={Booking} />
           <Route exact path='/signup' component={SignUp} />
+          <Route exact path='/booknow' component={Booking} />
         </Switch>
       </ScrollToTop>
     </HashRouter>

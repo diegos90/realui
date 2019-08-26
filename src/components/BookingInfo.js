@@ -17,6 +17,11 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -25,6 +30,7 @@ import {
 } from '@material-ui/pickers';
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
 import bookingContext from '../context/bookingContext';
+import { yellow } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,10 +44,22 @@ const useStyles = makeStyles(theme => ({
       width: '78%',
       display: 'block'
     },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: '78%',
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
     textFieldTravelInfo: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        width: '50%',
+        width: '78%',
+    },
+    selectTravelInfo: {
+      marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        minWidth: 200,
         display: 'inline'
     },
     dense: {
@@ -57,17 +75,19 @@ const useStyles = makeStyles(theme => ({
 
 function BookingInfo(props) {
   const classes = useStyles();
+  const inputLabel = React.useRef(null);
   const [values, setValues] = React.useState({
     name: '',
     email: '',
     phoneNumber: '',
     departureDate: Date(),
-    departureTime: Date(),
+    departureTime: '',
     depatureLocation: {},
     returnDate: Date(),
-    returnTime: Date(),
+    returnTime: null,
     returnLocation: {},
-    numberOfPeople: 1
+    numberOfPeople: 1,
+    age: ''
   });
 
   const bookingContextObj = useContext(bookingContext);
@@ -82,6 +102,13 @@ function BookingInfo(props) {
 
   const handleTimeInput = name => event => {
     setValues({ ...values, [name]: event });
+  }
+
+  const handleDepartureTimeSelect = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
   }
 
   const onSuggestionSelectedDeparture = suggestion => {
@@ -105,6 +132,8 @@ function BookingInfo(props) {
         console.log(err)
       })
   }
+
+ 
 
   const onSuggestionSelectedReturn = suggestion => {
     console.log(suggestion)
@@ -154,13 +183,14 @@ function BookingInfo(props) {
                 />
                 <TextField
                     id="outlined-name"
-                    label="Name"
+                    label="Cell Number"
                     className={classes.textField}
                     value={values.phoneNumber}
                     onChange={handleChange('phoneNumber')}
                     margin="normal"
                     variant="outlined"
                     fullWidth={true}
+                    
                 />
             </Grid>
             <Grid item xs={6}>
@@ -178,7 +208,7 @@ function BookingInfo(props) {
                         'aria-label': 'change date',
                       }}
                 />
-                <KeyboardTimePicker
+                {/*<KeyboardTimePicker
                     id="outlined-name"
                     label="Time"
                     className={classes.textFieldTravelInfo}
@@ -187,7 +217,28 @@ function BookingInfo(props) {
                     margin="normal"
                     variant="outlined"
                     inputVariant="outlined"
-                />
+                />*/}
+                
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel ref={inputLabel} htmlFor="outlined-name">
+                    Time
+                  </InputLabel>
+                  <Select
+                    label="Time"
+                    value={values.departureTime}
+                    onChange={handleDepartureTimeSelect}
+                    input={<OutlinedInput name="age" id="outlined-name" />}
+                    
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>13:00</MenuItem>
+                    <MenuItem value={20}>14:30</MenuItem>
+                    <MenuItem value={30}>15:30</MenuItem>
+                  </Select>
+                </FormControl>
+               
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
                         id="outlined-name"
@@ -215,16 +266,26 @@ function BookingInfo(props) {
                         'aria-label': 'change date',
                       }}
                 />
-                <KeyboardTimePicker
-                    id="outlined-name"
-                    label="Time"
-                    className={classes.textFieldTravelInfo}
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel ref={inputLabel} htmlFor="outlined-return-time">
+                    Time
+                  </InputLabel>
+                  <Select
+                    label="See"
                     value={values.returnTime}
                     onChange={handleTimeInput('returnTime')}
-                    margin="normal"
-                    variant="outlined"
-                    inputVariant="outlined"
-                />
+                    input={<OutlinedInput name="age" id="outlined-return-time" />}
+                    
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>13:00</MenuItem>
+                    <MenuItem value={20}>14:30</MenuItem>
+                    <MenuItem value={30}>15:30</MenuItem>
+                  </Select>
+                </FormControl>
+
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
                         id="outlined-name"

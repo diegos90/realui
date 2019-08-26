@@ -14,6 +14,10 @@ const Menu = [
   {
     label: "GigGuide",
     pathname: "/gigguide"
+  },
+  {
+    label: "Book Now",
+    pathname: "/booknow"
   }
 
 ];

@@ -114,7 +114,7 @@ class Topbar extends Component {
     if(this.props.currentPath === '/gigguide') {
       return 3
     }
-    if(this.props.currentPath === '/cards') {
+    if(this.props.currentPath === '/booknow') {
       return 4
     }
 

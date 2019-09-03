@@ -1,0 +1,41 @@
+<FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel ref={inputLabel} htmlFor="outlined-name">
+                    Time
+                  </InputLabel>
+                  <Select
+                    label="Time"
+                    value={values.departureTime}
+                    onChange={handleDepartureTimeSelect}
+                    input={<OutlinedInput name="age" id="outlined-name" />}
+                    
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>13:00</MenuItem>
+                    <MenuItem value={20}>14:30</MenuItem>
+                    <MenuItem value={30}>15:30</MenuItem>
+                  </Select>
+                </FormControl>
+
+
+
+<FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel ref={inputLabel} htmlFor="outlined-return-time">
+                    Time
+                  </InputLabel>
+                  <Select
+                    label="See"
+                    value={values.returnTime}
+                    onChange={handleTimeInput('returnTime')}
+                    input={<OutlinedInput name="age" id="outlined-return-time" />}
+                    
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>13:00</MenuItem>
+                    <MenuItem value={20}>14:30</MenuItem>
+                    <MenuItem value={30}>15:30</MenuItem>
+                  </Select>
+                </FormControl>

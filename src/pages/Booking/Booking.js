@@ -9,7 +9,7 @@ import Quote from '../../components/Quote';
 import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import {BookingConsumer} from '../../context/BookingContext';
 
 const backgroundShape = require('../../images/mainBackground.png');
 
@@ -35,6 +35,22 @@ const useStyles = makeStyles => (theme => ({
   },
 }));
 
+const bookingInfo = {
+  name: '',
+  email: '',
+  cellNumber: '',
+  departureDate: Date(),
+  departureTime: Date(),
+  depaturePickUpLocation: {},
+  depatureDropOffLocation: {},
+  returnDate: Date(),
+  returnTime: Date(),
+  returnPickUpLocation: {},
+  returnDropOffLocation: {},
+  vehicleType: '',
+  trailerRequired: true
+}
+
 function getSteps() {
   return ['Booking Information', 'Quotation', 'Make Payment'];
 }
@@ -43,9 +59,9 @@ function getStepContent(step) {
     const classes = useStyles();
   switch (step) {
     case 0:
-      return <BookingInfo />;
-    case 1: 
-        return <Quote />;
+        return <BookingInfo bookingInfo={bookingInfo}/>;
+    case 1:   
+        return <Quote bookingInfo={bookingInfo} />;
     case 2:
       return <Payment />;
     default:
@@ -83,6 +99,7 @@ export default function Booking() {
     setActiveStep(0);
   }
 
+  
   return (
     <React.Fragment>
     <CssBaseline />
@@ -126,7 +143,7 @@ export default function Booking() {
                 color="primary"
                 onClick={handleNext}
                 className={classes.button}
-              >
+                >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
@@ -136,5 +153,5 @@ export default function Booking() {
         </div>
         </div>
     </React.Fragment>
-  );
+    )
 }

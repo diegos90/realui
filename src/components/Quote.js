@@ -32,7 +32,7 @@ function Quote(props) {
             <Grid item xs={6}>
                 <Paper className={classes.root}>
                     <Typography component="p">
-                    Your quote for park and Ride Service on DATE is:
+                    Your quote for park and Ride Service on DATE is: {props.bookingInfo.name}
                     </Typography>
                     <Typography variant="h5" component="h3">
                     R 560.00 {pr}

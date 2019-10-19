@@ -3,6 +3,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css';
 import Routes from './routes'
 import { blue, red } from '@material-ui/core/colors'
+import {BookingProvider} from './context/BookingContext'
 
 const theme = createMuiTheme({
   palette: {
@@ -22,15 +23,18 @@ const theme = createMuiTheme({
   }
 });
 
+const booking = {}
+
 
 class App extends Component {
+
   render() {
     return (
-      <div>
+      <BookingProvider value={booking}>
         <MuiThemeProvider theme={theme}>
           <Routes />
         </MuiThemeProvider>
-      </div>
+      </BookingProvider>
     );
   }
 }

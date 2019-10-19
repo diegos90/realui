@@ -16,7 +16,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
-import bookingContext from '../context/bookingContext';
+import BookingConsumer from '../context/BookingContext';
 
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +65,7 @@ function BookingInfo(props) {
   const [values, setValues] = React.useState({
     name: '',
     email: '',
-    phoneNumber: '',
+    cellNumber: '',
     departureDate: Date(),
     departureTime: Date(),
     depaturePickUpLocation: {},
@@ -78,18 +78,20 @@ function BookingInfo(props) {
     trailerRequired: true
   });
 
-  const bookingContextObj = useContext(bookingContext);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
+    props.bookingInfo[name] = event.target.value;
   };
 
   const handleDateInput = name => event => {
     setValues({ ...values, [name]: event });
+    props.bookingInfo[name] = event;
   }
 
   const handleTimeInput = name => event => {
     setValues({ ...values, [name]: event });
+    props.bookingInfo[name] = event;
   }
 
   const handleVehicleTypeSelect = event => {
@@ -97,10 +99,12 @@ function BookingInfo(props) {
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
+    props.bookingInfo['vehicleType'] = event.target.value;
   }
 
   const handleTrailerRequiredChecked = name => event => {
     setValues({ ...values, [name]: event.target.checked });
+    props.bookingInfo[name] = event.target.checked;
   };
 
   const onSuggestionSelectedDeparture = suggestion => {
@@ -115,9 +119,9 @@ function BookingInfo(props) {
         values.depatureLocation.lat = geometry.location.lat();
         values.depatureLocation.lng = geometry.location.lng();
 
-        bookingContextObj.depatureLocation.description = suggestion.description;
+        /*bookingContextObj.depatureLocation.description = suggestion.description;
         bookingContextObj.depatureLocation.lat = geometry.location.lat();
-        bookingContextObj.depatureLocation.lng = geometry.location.lng();
+        bookingContextObj.depatureLocation.lng = geometry.location.lng();*/
 
     }).catch((err) => {
         console.log("Ayo there be errors yo!")
@@ -135,9 +139,9 @@ function BookingInfo(props) {
     // 3) Have an address associated with them
     return {
       input: inputValue,
-      types: ['address'],
-      location: { lat: () => 48.7519, lng: () => 122.4787 },
-      radius: 5000,
+      types: ['geocode', 'establishment'],
+      location: { lat: () => -34.2969541, lng: () => 18.2479026 },
+      radius: 1000,
     }
   }
 
@@ -155,9 +159,9 @@ function BookingInfo(props) {
       values.returnLocation.lat = geometry.location.lat();
       values.returnLocation.lng = geometry.location.lng();
 
-      bookingContextObj.returnLocation.description = suggestion.description;
+      /*bookingContextObj.returnLocation.description = suggestion.description;
       bookingContextObj.returnLocation.lat = geometry.location.lat();
-      bookingContextObj.returnLocation.lng = geometry.location.lng();
+      bookingContextObj.returnLocation.lng = geometry.location.lng();*/
 
   }).catch((err) => {
       console.log("Ayo there be errors yo!")
@@ -174,7 +178,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Name"
                     className={classes.textField}
-                    value={values.name}
+                    value={props.bookingInfo.name}
                     onChange={handleChange('name')}
                     margin="normal"
                     variant="outlined"
@@ -194,8 +198,8 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Cell Number"
                     className={classes.textField}
-                    value={values.phoneNumber}
-                    onChange={handleChange('phoneNumber')}
+                    value={values.cellNumber}
+                    onChange={handleChange('cellNumber')}
                     margin="normal"
                     variant="outlined"
                     fullWidth={true}
@@ -237,6 +241,7 @@ function BookingInfo(props) {
                         margin="normal"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDeparture}
+                        createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
@@ -251,6 +256,7 @@ function BookingInfo(props) {
                         margin="normal"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDeparture}
+                        createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Dropff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
@@ -274,8 +280,8 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Time"
                     className={classes.textFieldTravelInfo}
-                    value={values.departureTime}
-                    onChange={handleTimeInput('departureTime')}
+                    value={values.returnTime}
+                    onChange={handleTimeInput('returnTime')}
                     margin="normal"
                     variant="outlined"
                     inputVariant="outlined"
@@ -285,12 +291,13 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Pickup Location"
-                        value={values.depatureReturn}
-                        onChange={handleChange('depatureReturn')}
+                        value={values.returnPickUpLocation}
+                        onChange={handleChange('returnPickUpLocation')}
                         margin="normal"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedReturn}
-                        textFieldProps={{ variant: 'outlined', label: 'Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        createAutocompleteRequest={createAutocompleteRequest}
+                        textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
@@ -298,12 +305,13 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Dropoff Location"
-                        value={values.depatureReturn}
-                        onChange={handleChange('depatureReturn')}
+                        value={values.returnDropOffLocation}
+                        onChange={handleChange('returnDropOffLocation')}
                         margin="normal"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedReturn}
-                        textFieldProps={{ variant: 'outlined', label: 'Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        createAutocompleteRequest={createAutocompleteRequest}
+                        textFieldProps={{ variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>

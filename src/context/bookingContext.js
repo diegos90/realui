@@ -1,16 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-const bookingContext = React.createContext({
-    user_id: '',
-    event_id: '',
-    event_location: null,
-    departureDate: null,
-    departureTime: null,
-    departureLocation: null,
-    returnDate: null,
-    returnTime: null,
-    returnLocation: null
+const BookingContext = React.createContext({})
 
-});
-
-export default bookingContext;
+export const BookingProvider = BookingContext.Provider
+export const BookingConsumer = BookingContext.Consumer
+export default BookingContext

@@ -63,7 +63,7 @@ function getStepContent(step) {
     case 1:   
         return <Quote bookingInfo={bookingInfo} />;
     case 2:
-      return <Payment price={price} />;
+      return <Payment />;
     default:
       return 'Unknown step';
   }

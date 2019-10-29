@@ -16,7 +16,6 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
-import BookingConsumer from '../context/BookingContext';
 
 
 const useStyles = makeStyles(theme => ({

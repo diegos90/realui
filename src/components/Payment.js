@@ -10,16 +10,58 @@ const useStyles = makeStyles(theme => ({
     root: {
       padding: theme.spacing(3, 2),
     },
+    textField: {
+      margin: 3
+    },
+    creditCard:{
+      margin: 'auto',
+      marginBottom: 7
+    }
   }));
   
+function flipToFront(){
+
+}
+
+function flipToBack(){
+  
+}
+
 
 function Payment(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     name: '',
-    email: ''
+    email: '',
   });
 
+  const [flipped, setFlippedState] = React.useState(false)
+  const [cardNumber, setCardNumber] = React.useState("4111111111111111")
+  const [cardExpiryDate, setCardExpiryDate] = React.useState("12/20")
+  const [cardHolderName, setCardHolderName] = React.useState("Name Surname")
+  const [cardCVV, setCardCVV] = React.useState("202")
+
+  const flipToFront = () =>{
+    setFlippedState(false)
+  }
+
+  const flipToBack = () => {
+    setFlippedState(true)
+  }
+
+  const handleCardNumberInput = event => {
+    setCardNumber(event.target.value)
+  }
+  const handleCardExpiryDateInput = event => {
+    setCardExpiryDate(event.target.value)
+  }
+  const handleCardHolderNameInput = event => {
+    setCardHolderName(event.target.value)
+  }
+
+  const handleCardCVVInput = event => {
+    setCardCVV(event.target.value)
+  }
 
   return (
         <Grid container container
@@ -29,19 +71,30 @@ function Payment(props) {
         justify="center" spacing={2}>
             <Grid item xs />
             <Grid item xs={6}>
-                <Paper className={classes.root}>
-                <div>
-                {/*<PaymentCard
-                  bank="itau"
+              <Paper className={classes.root}>
+                <PaymentCard
+                className={classes.creditCard}
+                  bank="default"
                   model="personnalite"
                   type="black"
                   brand="mastercard"
-                  number="4111111111111111"
-                  cvv="202"
-                  holderName="Owen Lars"
-                  expiration="12/20"
-                  flipped={false}
-                />*/}
+                  number={cardNumber}
+                  cvv={cardCVV}
+                  holderName={cardHolderName}
+                  expiration={cardExpiryDate}
+                  flipped={flipped}
+                />
+                <div>
+                <TextField
+                    id="outlined-name"
+                    label="Amount"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={true}
+                />
+                </div>
+                <div>
                 <TextField
                     id="outlined-name"
                     label="Card Number"
@@ -49,6 +102,9 @@ function Payment(props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardNumberInput}
+                    inputProps={{ maxLength: 16 }}
                 />
                 <TextField
                     id="outlined-name"
@@ -57,6 +113,9 @@ function Payment(props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardExpiryDateInput}
+                    inputProps={{ maxLength: 5, pattern: "[A-Za-z]+" }}
                 />
                 </div>
                 <div>
@@ -67,6 +126,8 @@ function Payment(props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardHolderNameInput}
                 />
                 <TextField
                     id="outlined-name"
@@ -75,6 +136,9 @@ function Payment(props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth={false}
+                    onFocus={flipToBack}
+                    onChange={handleCardCVVInput}
+                    inputProps={{ maxLength: 3 }}
                 />
                 </div>
                 </Paper>

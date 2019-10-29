@@ -10,11 +10,30 @@ const useStyles = makeStyles(theme => ({
     root: {
       padding: theme.spacing(3, 2),
     },
+    price: {
+      color: '#d32f2f'
+    }
   }));
   
   const price = df => {
      setTimeout(()=>{ "ddd"},5000)
   }
+
+  function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+    try {
+      decimalCount = Math.abs(decimalCount);
+      decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+  
+      const negativeSign = amount < 0 ? "-" : "";
+  
+      let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+      let j = (i.length > 3) ? i.length % 3 : 0;
+  
+      return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+    } catch (e) {
+      console.log(e)
+    }
+  };
 
 
 function Quote(props) {
@@ -29,11 +48,12 @@ function Quote(props) {
 
   const getBookingQuote = async (bookingInfo) => {
     let recievedQuote = {}
-    await axios.post(`http://localhost:5000/nite-life/us-central1/api/gettripprice`, { 'bookingInfo' : bookingInfo })
+    await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
           console.log("BLUE");
           console.log(res.data);
           recievedQuote = res.data
+          props.price = recievedQuote.price
           setQuote(recievedQuote)
           setShow(true)
         })
@@ -54,11 +74,23 @@ function Quote(props) {
             <Grid item xs={6}>
             {show ? (
                         <Paper className={classes.root}>
-                        <Typography component="p">
-                        Your quote for park and Ride Service on DATE is: {props.bookingInfo.name}
-                        </Typography>
                         <Typography variant="h5" component="h3">
-                        R {quote.price}
+                          Your Party Cab quote is: 
+                        </Typography>
+                        <Typography component="p">
+                          Billed to: {props.bookingInfo.name}
+                        </Typography>
+                        <Typography component="p">
+                          Email: {props.bookingInfo.email}
+                        </Typography>
+                        <Typography component="p">
+                          Departure: {quote.departureTrip.distance}
+                        </Typography> 
+                        <Typography component="p">
+                          Return: {quote.returnTrip.distance}
+                        </Typography>
+                        <Typography variant="h4" component="h3" className={classes.price}>
+                        R {formatMoney(quote.price)}
                         </Typography>
                     </Paper>
                           ) : (

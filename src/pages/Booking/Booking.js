@@ -50,8 +50,6 @@ const bookingInfo = {
   trailerRequired: true
 }
 
-var price = 0
-
 function getSteps() {
   return ['Booking Information', 'Quotation', 'Make Payment'];
 }
@@ -63,7 +61,7 @@ function getStepContent(step) {
     case 0:
         return <BookingInfo bookingInfo={bookingInfo}/>;
     case 1:   
-        return <Quote bookingInfo={bookingInfo} price={price} />;
+        return <Quote bookingInfo={bookingInfo} />;
     case 2:
       return <Payment price={price} />;
     default:

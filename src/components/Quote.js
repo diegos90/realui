@@ -53,7 +53,6 @@ function Quote(props) {
           console.log("BLUE");
           console.log(res.data);
           recievedQuote = res.data
-          props.price = recievedQuote.price
           setQuote(recievedQuote)
           setShow(true)
         })

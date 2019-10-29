@@ -9,7 +9,6 @@ import Quote from '../../components/Quote';
 import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {BookingConsumer} from '../../context/BookingContext';
 
 const backgroundShape = require('../../images/mainBackground.png');
 
@@ -41,8 +40,8 @@ const bookingInfo = {
   cellNumber: '',
   departureDate: Date(),
   departureTime: Date(),
-  depaturePickUpLocation: {},
-  depatureDropOffLocation: {},
+  departurePickUpLocation: {},
+  departureDropOffLocation: {},
   returnDate: Date(),
   returnTime: Date(),
   returnPickUpLocation: {},
@@ -57,6 +56,7 @@ function getSteps() {
 
 function getStepContent(step) {
     const classes = useStyles();
+    console.log(bookingInfo)
   switch (step) {
     case 0:
         return <BookingInfo bookingInfo={bookingInfo}/>;
@@ -68,6 +68,7 @@ function getStepContent(step) {
       return 'Unknown step';
   }
 }
+
 
 export default function Booking() {
   const classes = useStyles();

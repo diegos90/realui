@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import PaymentCard from 'react-payment-card-component';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,6 +31,17 @@ function Payment(props) {
             <Grid item xs={6}>
                 <Paper className={classes.root}>
                 <div>
+                {/*<PaymentCard
+                  bank="itau"
+                  model="personnalite"
+                  type="black"
+                  brand="mastercard"
+                  number="4111111111111111"
+                  cvv="202"
+                  holderName="Owen Lars"
+                  expiration="12/20"
+                  flipped={false}
+                />*/}
                 <TextField
                     id="outlined-name"
                     label="Card Number"

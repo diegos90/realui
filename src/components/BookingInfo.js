@@ -68,8 +68,8 @@ function BookingInfo(props) {
     cellNumber: '',
     departureDate: Date(),
     departureTime: Date(),
-    depaturePickUpLocation: {},
-    depatureDropOffLocation: {},
+    departurePickUpLocation: {},
+    departureDropOffLocation: {},
     returnDate: Date(),
     returnTime: Date(),
     returnPickUpLocation: {},
@@ -107,7 +107,7 @@ function BookingInfo(props) {
     props.bookingInfo[name] = event.target.checked;
   };
 
-  const onSuggestionSelectedDeparture = suggestion => {
+  const onSuggestionSelectedDeparturePickUp = suggestion => {
       console.log(suggestion)
       geocodeByPlaceID(suggestion.place_id).then((results) => {
   
@@ -115,20 +115,86 @@ function BookingInfo(props) {
         console.log(geometry.location.lat(),)
         console.log(geometry.location.lng(),)
         
-        values.depatureLocation.description = suggestion.description;
-        values.depatureLocation.lat = geometry.location.lat();
-        values.depatureLocation.lng = geometry.location.lng();
+        values.departurePickUpLocation.description = suggestion.description;
+        values.departurePickUpLocation.lat = geometry.location.lat();
+        values.departurePickUpLocation.lng = geometry.location.lng();
 
-        /*bookingContextObj.depatureLocation.description = suggestion.description;
-        bookingContextObj.depatureLocation.lat = geometry.location.lat();
-        bookingContextObj.depatureLocation.lng = geometry.location.lng();*/
+        props.bookingInfo.departurePickUpLocation.description = suggestion.description;
+        props.bookingInfo.departurePickUpLocation.lat = geometry.location.lat();
+        props.bookingInfo.departurePickUpLocation.lng = geometry.location.lng();
 
     }).catch((err) => {
         console.log("Ayo there be errors yo!")
         console.log(err)
       })
+  }
+
+  const onSuggestionSelectedDepartureDropOff = suggestion => {
+    console.log(suggestion)
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+
+      const { geometry } = results[0]
+      console.log(geometry.location.lat(),)
+      console.log(geometry.location.lng(),)
+      
+      values.departureDropOffLocation.description = suggestion.description;
+      values.departureDropOffLocation.lat = geometry.location.lat();
+      values.departureDropOffLocation.lng = geometry.location.lng();
+
+      props.bookingInfo.departureDropOffLocation.description = suggestion.description;
+      props.bookingInfo.departureDropOffLocation.lat = geometry.location.lat();
+      props.bookingInfo.departureDropOffLocation.lng = geometry.location.lng();
+
+    }).catch((err) => {
+      console.log("Ayo there be errors yo!")
+      console.log(err)
+    })
+  }
 
 
+  const onSuggestionSelectedReturnPickUp = suggestion => {
+    console.log(suggestion)
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+
+      const { geometry } = results[0]
+      console.log(geometry.location.lat(),)
+      console.log(geometry.location.lng(),)
+      
+      values.returnPickUpLocation.description = suggestion.description;
+      values.returnPickUpLocation.lat = geometry.location.lat();
+      values.returnPickUpLocation.lng = geometry.location.lng();
+
+      props.bookingInfo.returnPickUpLocation.description = suggestion.description;
+      props.bookingInfo.returnPickUpLocation.lat = geometry.location.lat();
+      props.bookingInfo.returnPickUpLocation.lng = geometry.location.lng();
+
+    }).catch((err) => {
+      console.log("Ayo there be errors yo!")
+      console.log(err)
+    })
+  }
+
+
+  const onSuggestionSelectedReturnDropOff = suggestion => {
+    console.log(suggestion)
+    geocodeByPlaceID(suggestion.place_id).then((results) => {
+
+      const { geometry } = results[0]
+      console.log(geometry.location.lat(),)
+      console.log(geometry.location.lng(),)
+      
+      values.returnDropOffLocation.description = suggestion.description;
+      values.returnDropOffLocation.lat = geometry.location.lat();
+      values.returnDropOffLocation.lng = geometry.location.lng();
+
+      props.bookingInfo.returnDropOffLocation.description = suggestion.description;
+      props.bookingInfo.returnDropOffLocation.lat = geometry.location.lat();
+      props.bookingInfo.returnDropOffLocation.lng = geometry.location.lng();
+
+    }).catch((err) => {
+      console.log("Ayo there be errors yo!")
+      console.log(err)
+    })
   }
 
 
@@ -145,29 +211,6 @@ function BookingInfo(props) {
     }
   }
 
- 
-
-  const onSuggestionSelectedReturn = suggestion => {
-    console.log(suggestion)
-    geocodeByPlaceID(suggestion.place_id).then((results) => {
-
-      const { geometry } = results[0]
-      console.log(geometry.location.lat(),)
-      console.log(geometry.location.lng(),)
-      
-      values.returnLocation.description = suggestion.description;
-      values.returnLocation.lat = geometry.location.lat();
-      values.returnLocation.lng = geometry.location.lng();
-
-      /*bookingContextObj.returnLocation.description = suggestion.description;
-      bookingContextObj.returnLocation.lat = geometry.location.lat();
-      bookingContextObj.returnLocation.lng = geometry.location.lng();*/
-
-  }).catch((err) => {
-      console.log("Ayo there be errors yo!")
-      console.log(err)
-    })
-}
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -236,11 +279,11 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Pickup Location"
-                        value={values.depaturePickUpLocation}
-                        onChange={handleChange('depaturePickUpLocation')}
+                        value={values.departurePickUpLocation}
+                        onChange={handleChange('departurePickUpLocation')}
                         margin="normal"
                         variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedDeparture}
+                        onSuggestionSelected={onSuggestionSelectedDeparturePickUp}
                         createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
@@ -251,11 +294,11 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Dropoff Location"
-                        value={values.depatureDropOffLocation}
-                        onChange={handleChange('depatureDropOffLocation')}
+                        value={values.departureDropOffLocation}
+                        onChange={handleChange('departureDropOffLocation')}
                         margin="normal"
                         variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedDeparture}
+                        onSuggestionSelected={onSuggestionSelectedDepartureDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Dropff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
@@ -295,7 +338,7 @@ function BookingInfo(props) {
                         onChange={handleChange('returnPickUpLocation')}
                         margin="normal"
                         variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedReturn}
+                        onSuggestionSelected={onSuggestionSelectedReturnPickUp}
                         createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
@@ -309,7 +352,7 @@ function BookingInfo(props) {
                         onChange={handleChange('returnDropOffLocation')}
                         margin="normal"
                         variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedReturn}
+                        onSuggestionSelected={onSuggestionSelectedReturnDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}

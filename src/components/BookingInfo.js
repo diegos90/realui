@@ -144,6 +144,10 @@ function BookingInfo(props) {
       props.bookingInfo.departureDropOffLocation.lat = geometry.location.lat();
       props.bookingInfo.departureDropOffLocation.lng = geometry.location.lng();
 
+
+      //RETURN PICKUP:
+      onSuggestionSelectedReturnPickUp(suggestion)
+
     }).catch((err) => {
       console.log("Ayo there be errors yo!")
       console.log(err)
@@ -292,14 +296,14 @@ function BookingInfo(props) {
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
                         id="outlined-name"
-                        label="Dropoff Location"
+                        label="Destination"
                         value={values.departureDropOffLocation}
                         onChange={handleChange('departureDropOffLocation')}
                         margin="normal"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDepartureDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Dropff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        textFieldProps={{ variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
@@ -330,7 +334,7 @@ function BookingInfo(props) {
                 />
                 
                 <div style={{ position: 'relative'}}>
-                    <MUIPlacesAutocomplete
+                    {/*<MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Pickup Location"
                         value={values.returnPickUpLocation}
@@ -341,7 +345,7 @@ function BookingInfo(props) {
                         createAutocompleteRequest={createAutocompleteRequest}
                         textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
-                    />
+                    />*/}
                 </div>
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete

@@ -72,6 +72,7 @@ export default function Booking() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const nextButtonContent = ["Make Booking", "Make Payment", "Next..."]
   const steps = getSteps();
 
   function isStepSkipped(step) {
@@ -143,7 +144,7 @@ export default function Booking() {
                 onClick={handleNext}
                 className={classes.button}
                 >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? 'Finish' : nextButtonContent[activeStep]}
               </Button>
             </div>
           </div>

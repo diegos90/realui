@@ -19,6 +19,14 @@ const useStyles = makeStyles(theme => ({
     }
   }));
   
+function flipToFront(){
+
+}
+
+function flipToBack(){
+  
+}
+
 
 function Payment(props) {
   const classes = useStyles();
@@ -64,7 +72,7 @@ function Payment(props) {
             <Grid item xs />
             <Grid item xs={6}>
               <Paper className={classes.root}>
-                {/*<PaymentCard
+                <PaymentCard
                 className={classes.creditCard}
                   bank="default"
                   model="personnalite"
@@ -75,10 +83,64 @@ function Payment(props) {
                   holderName={cardHolderName}
                   expiration={cardExpiryDate}
                   flipped={flipped}
-                />*/}
-                
-               
-                
+                />
+                <div>
+                <TextField
+                    id="outlined-name"
+                    label="Amount"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={true}
+                />
+                </div>
+                <div>
+                <TextField
+                    id="outlined-name"
+                    label="Card Number"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardNumberInput}
+                    inputProps={{ maxLength: 16 }}
+                />
+                <TextField
+                    id="outlined-name"
+                    label="Expiry Date"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardExpiryDateInput}
+                    inputProps={{ maxLength: 5, pattern: "[A-Za-z]+" }}
+                />
+                </div>
+                <div>
+                <TextField
+                    id="outlined-name"
+                    label="Card Holder"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={false}
+                    onFocus={flipToFront}
+                    onChange={handleCardHolderNameInput}
+                />
+                <TextField
+                    id="outlined-name"
+                    label="CVV"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth={false}
+                    onFocus={flipToBack}
+                    onChange={handleCardCVVInput}
+                    inputProps={{ maxLength: 3 }}
+                />
+                </div>
                 </Paper>
             </Grid>
             <Grid item xs />  

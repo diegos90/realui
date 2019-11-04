@@ -15,9 +15,6 @@ const useStyles = makeStyles(theme => ({
     }
   }));
   
-  const price = df => {
-     setTimeout(()=>{ "ddd"},5000)
-  }
 
   function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     try {
@@ -50,8 +47,6 @@ function Quote(props) {
     let recievedQuote = {}
     await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
-          console.log("BLUE");
-          console.log(res.data);
           recievedQuote = res.data
           setQuote(recievedQuote)
           setShow(true)
@@ -65,7 +60,6 @@ function Quote(props) {
 
   return (
         <Grid container
-          spacing={0}
           direction="column"
           alignItems="center"
           justify="center" spacing={2}>

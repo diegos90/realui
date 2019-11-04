@@ -55,8 +55,6 @@ function getSteps() {
 }
 
 function getStepContent(step) {
-    const classes = useStyles();
-    console.log(bookingInfo)
   switch (step) {
     case 0:
         return <BookingInfo bookingInfo={bookingInfo}/>;
@@ -125,7 +123,7 @@ export default function Booking() {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
-              <center>Payment Completed &#128519;</center>
+              <center>Payment Completed <span role="img" aria-label="Smiley Face">&#128519;</span></center>
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset

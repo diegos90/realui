@@ -1,6 +1,6 @@
 import React,  { Component } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -183,7 +183,7 @@ class OurStory extends Component {
     const { classes } = this.props;
     const currentPath = this.props.location.pathname
     const clientList = this.state.clients.map((client) => 
-      <img src={client.url} className={classes.clientLogo} key={client.id} />
+      <img src={client.url} className={classes.clientLogo} key={client.id} alt=""/>
     )
 
     return (

@@ -23,8 +23,6 @@ const theme = createMuiTheme({
   }
 });
 
-const booking = {}
-
 
 class App extends Component {
 

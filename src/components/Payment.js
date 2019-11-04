@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import PaymentCard from 'react-payment-card-component';
@@ -18,23 +17,9 @@ const useStyles = makeStyles(theme => ({
       marginBottom: 7
     }
   }));
-  
-function flipToFront(){
-
-}
-
-function flipToBack(){
-  
-}
-
 
 function Payment(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    name: '',
-    email: '',
-  });
-
   const [flipped, setFlippedState] = React.useState(false)
   const [cardNumber, setCardNumber] = React.useState("4111111111111111")
   const [cardExpiryDate, setCardExpiryDate] = React.useState("12/20")
@@ -64,8 +49,7 @@ function Payment(props) {
   }
 
   return (
-        <Grid container container
-        spacing={0}
+        <Grid container
         direction="column"
         alignItems="center"
         justify="center" spacing={2}>

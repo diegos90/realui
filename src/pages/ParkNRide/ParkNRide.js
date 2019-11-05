@@ -9,7 +9,7 @@ import Quote from '../../components/Quote';
 import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import ParkNRideInfo from '../../components/ParkNRideInfo';
 const backgroundShape = require('../../images/mainBackground.png');
 
 const useStyles = makeStyles => (theme => ({
@@ -51,13 +51,13 @@ const parkNRideInfo = {
 }
 
 function getSteps() {
-  return ['kjhgkjgkjgkjgkjgkjg Booking Information', 'Quotation', 'Make Payment'];
+  return ['ParkNRide Information', 'Quotation', 'Make Payment'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-        return <BookingInfo bookingInfo={parkNRideInfo}/>;
+        return <ParkNRideInfo bookingInfo={parkNRideInfo}/>;
     case 1:   
         return <Quote bookingInfo={parkNRideInfo} />;
     case 2:

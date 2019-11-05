@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 import {
   MuiPickersUtilsProvider,
@@ -59,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   
 
 
-function BookingInfo(props) {
+function ParkNRideInfo(props) {
   const classes = useStyles();
   //const inputLabel = React.useRef(null);
   const [values, setValues] = React.useState({
@@ -236,7 +238,32 @@ function BookingInfo(props) {
             </Grid>
             <Grid item xs={12} md={6}>
                 <header>Departure Choice</header>
-                <KeyboardDatePicker
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel  htmlFor="outlined-name">
+                    Departure
+                  </InputLabel>
+                  <Select
+                    label="Time"
+                    value={props.bookingInfo.vehicleType}
+                    onChange={handleVehicleTypeSelect}
+                    input={<OutlinedInput name="vehicleType" id="outlined-name" />}
+                    
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value="NLPREMIUM">
+                        <Button variant="contained" color="primary"><NavigationIcon className={classes.extendedIcon} />Hello</Button><Button variant="contained" color="white">World</Button>
+                    </MenuItem>
+                    <MenuItem value="NLPREMIUMXL">
+                    <Button variant="contained" color="primary">Hello</Button><Button variant="contained" color="white">World</Button>
+                    </MenuItem>
+                    <MenuItem value="NLSUPERSTAR">
+                    <Button variant="contained" color="primary">Hello</Button><Button variant="contained" color="white">World</Button>
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                {/*<KeyboardDatePicker
                     id="outlined-name"
                     label="Date"
                     className={classes.textFieldTravelInfo}
@@ -288,9 +315,9 @@ function BookingInfo(props) {
                         textFieldProps={{ variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
-                </div>
+                    </div>*/}
                 <header>Return Choice</header>
-                <KeyboardDatePicker
+                {/*<KeyboardDatePicker
                     id="outlined-name"
                     label="Date"
                     className={classes.textFieldTravelInfo}
@@ -316,20 +343,6 @@ function BookingInfo(props) {
                 />
                 
                 <div style={{ position: 'relative'}}>
-                    {/*<MUIPlacesAutocomplete
-                        id="outlined-name"
-                        label="Pickup Location"
-                        value={values.returnPickUpLocation}
-                        onChange={handleChange('returnPickUpLocation')}
-                        margin="normal"
-                        variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedReturnPickUp}
-                        createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
-                    />*/}
-                </div>
-                <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Dropoff Location"
@@ -342,7 +355,7 @@ function BookingInfo(props) {
                         textFieldProps={{ variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
-                </div>
+                </div>*/}
                 <header>Vehicle Type</header>
                 {/*<TextField
                     id="numberOfPeople"
@@ -389,4 +402,4 @@ function BookingInfo(props) {
   );
 }
 
-export default BookingInfo;
+export default ParkNRideInfo;

@@ -4,6 +4,7 @@ import OurStory from './pages/OurStory/OurStory'
 import Gallery from './pages/Gallery/Gallery'
 import GigGuide from './pages/GigGuide/GigGuide'
 import Booking from './pages/Booking/Booking'
+import ParkNRide from './pages/ParkNRide/ParkNRide'
 import Main from './components/Main'
 import ScrollToTop from './components/ScrollTop'
 import SignUp from './components/Signup'
@@ -19,6 +20,7 @@ export default props => (
           <Route exact path='/booking' component={Booking} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/booknow' component={Booking} />
+          <Route exact path='/parknride' component={ParkNRide} />
         </Switch>
       </ScrollToTop>
     </HashRouter>

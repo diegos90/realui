@@ -234,7 +234,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Email"
                     className={classes.textField}
-                    value={values.email}
+                    value={props.bookingInfo.email}
                     onChange={handleChange('email')}
                     margin="normal"
                     variant="outlined"
@@ -244,11 +244,13 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Cell Number"
                     className={classes.textField}
-                    value={values.cellNumber}
+                    value={props.bookingInfo.cellNumber}
                     onChange={handleChange('cellNumber')}
                     margin="normal"
                     variant="outlined"
                     fullWidth={true}
+                    inputProps={{ maxLength: 13 }}
+                    
                     
                 />
             </Grid>
@@ -258,7 +260,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Date"
                     className={classes.textFieldTravelInfo}
-                    value={values.departureDate}
+                    value={props.bookingInfo.departureDate}
                     onChange={handleDateInput('departureDate')}
                     margin="normal"
                     variant="outlined"
@@ -271,7 +273,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Time"
                     className={classes.textFieldTravelInfo}
-                    value={values.departureTime}
+                    value={props.bookingInfo.departureTime}
                     onChange={handleTimeInput('departureTime')}
                     margin="normal"
                     variant="outlined"
@@ -282,7 +284,7 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Pickup Location"
-                        value={values.departurePickUpLocation}
+                        value={props.bookingInfo.departurePickUpLocation}
                         onChange={handleChange('departurePickUpLocation')}
                         margin="normal"
                         variant="outlined"
@@ -297,7 +299,7 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Destination"
-                        value={values.departureDropOffLocation}
+                        value={props.bookingInfo.departureDropOffLocation}
                         onChange={handleChange('departureDropOffLocation')}
                         margin="normal"
                         variant="outlined"
@@ -312,7 +314,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Date"
                     className={classes.textFieldTravelInfo}
-                    value={values.returnDate}
+                    value={props.bookingInfo.returnDate}
                     onChange={handleDateInput('returnDate')}
                     margin="normal"
                     variant="outlined"
@@ -326,7 +328,7 @@ function BookingInfo(props) {
                     id="outlined-name"
                     label="Time"
                     className={classes.textFieldTravelInfo}
-                    value={values.returnTime}
+                    value={props.bookingInfo.returnTime}
                     onChange={handleTimeInput('returnTime')}
                     margin="normal"
                     variant="outlined"
@@ -351,7 +353,7 @@ function BookingInfo(props) {
                     <MUIPlacesAutocomplete
                         id="outlined-name"
                         label="Dropoff Location"
-                        value={values.returnDropOffLocation}
+                        value={props.bookingInfo.returnDropOffLocation}
                         onChange={handleChange('returnDropOffLocation')}
                         margin="normal"
                         variant="outlined"
@@ -379,7 +381,7 @@ function BookingInfo(props) {
                   </InputLabel>
                   <Select
                     label="Time"
-                    value={values.vehicleType}
+                    value={props.bookingInfo.vehicleType}
                     onChange={handleVehicleTypeSelect}
                     input={<OutlinedInput name="vehicleType" id="outlined-name" />}
                     

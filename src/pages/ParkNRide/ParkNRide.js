@@ -34,32 +34,32 @@ const useStyles = makeStyles => (theme => ({
   },
 }));
 
-const bookingInfo = {
+const parkNRideInfo = {
   name: '',
   email: '',
   cellNumber: '',
-  departureDate: null,
-  departureTime: null,
+  departureDate: Date(),
+  departureTime: Date(),
   departurePickUpLocation: {},
   departureDropOffLocation: {},
-  returnDate: null,
-  returnTime: null,
+  returnDate: Date(),
+  returnTime: Date(),
   returnPickUpLocation: {},
   returnDropOffLocation: {},
   vehicleType: '',
-  trailerRequired: null
+  trailerRequired: true
 }
 
 function getSteps() {
-  return ['Booking Information', 'Quotation', 'Make Payment'];
+  return ['kjhgkjgkjgkjgkjgkjg Booking Information', 'Quotation', 'Make Payment'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-        return <BookingInfo bookingInfo={bookingInfo}/>;
+        return <BookingInfo bookingInfo={parkNRideInfo}/>;
     case 1:   
-        return <Quote bookingInfo={bookingInfo} />;
+        return <Quote bookingInfo={parkNRideInfo} />;
     case 2:
       return <Payment />;
     default:
@@ -68,11 +68,11 @@ function getStepContent(step) {
 }
 
 
-export default function Booking() {
+export default function ParkNRide() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  const nextButtonContent = ["Generate Quote", "Make Payment"]
+  const nextButtonContent = ["Make Booking", "Make Payment", "Next..."]
   const steps = getSteps();
 
   function isStepSkipped(step) {

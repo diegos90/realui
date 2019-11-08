@@ -102,6 +102,7 @@ class Topbar extends Component {
   }
 
   current = () => {
+    console.log("cp: "+this.props.currentPath)
     if(this.props.currentPath === '/home') {
       return 0
     }
@@ -116,6 +117,9 @@ class Topbar extends Component {
     }
     if(this.props.currentPath === '/booknow') {
       return 4
+    }
+    if(this.props.currentPath === '/parknride') {
+      return 5
     }
 
   }
@@ -166,6 +170,10 @@ class Topbar extends Component {
                           {Menu.map((item, index) => (
                             <Tab key={index} component={Link} to={{pathname: item.pathname, search: this.props.location.search}} classes={{root: classes.tabItem}} label={item.label} />
                           ))}
+                          {
+                          (this.current() === 5) ?
+                            <Tab component={Link} to={"#"} classes={{root: classes.tabItem}} label={ "ParkNRide"} /> : <Tab/>
+                          }
                         </Tabs>
                       </div>
                     </React.Fragment>

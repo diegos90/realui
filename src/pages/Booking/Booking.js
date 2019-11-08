@@ -133,7 +133,8 @@ export default function Booking() {
         ) : (
           <div>
            {getStepContent(activeStep)}
-            <div>
+           <center>
+            <div style={{ marginTop: 30}}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
@@ -147,6 +148,7 @@ export default function Booking() {
                 {activeStep === steps.length - 1 ? 'Finish' : nextButtonContent[activeStep]}
               </Button>
             </div>
+            </center>
           </div>
         )}
       </div>

@@ -76,7 +76,7 @@ function EventCard(props) {
         <Button variant="outlined" className={classes.button} target="_blank" href={props.eventUrl}>
             MORE INFO
         </Button>
-        <Button variant="outlined" className={classes.button} target="_blank" disabled/*href={"/#/booking?event_id="+props.id+"&user_id=user"}*/>
+        <Button variant="outlined" className={classes.button} href={"/#/parknride?event_id="+props.id+"&user_id=user"}>
             PARK AND RIDE
         </Button>
         <IconButton

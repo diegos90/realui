@@ -32,6 +32,9 @@ const useStyles = makeStyles => (theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  navigationButtons: {
+    backgroundColor: 'green'
+  }
 }));
 
 const parkNRideInfo = {
@@ -103,7 +106,7 @@ export default function ParkNRide() {
   return (
     <React.Fragment>
     <CssBaseline />
-    <Topbar currentPath="/booknow" />
+    <Topbar currentPath="/parknride" />
     <div className={classes.root}>
       <div className={classes.booking}>
       <Stepper activeStep={activeStep}>
@@ -133,7 +136,7 @@ export default function ParkNRide() {
         ) : (
           <div>
            {getStepContent(activeStep)}
-            <div>
+            <div className={classes.navigationButtons} style={{width: 400, marginLeft: 'auto', marginRight: 'auto', marginTop: 30}}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>

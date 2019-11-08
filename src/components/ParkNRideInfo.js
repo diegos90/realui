@@ -11,7 +11,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import LocationOnIcon from '@material-ui/icons/Room';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import {red} from '@material-ui/core/colors'
 
 import {
   MuiPickersUtilsProvider,
@@ -56,6 +60,24 @@ const useStyles = makeStyles(theme => ({
     menu: {
       width: 200,
     },
+    selectOption: {
+      display: 'inline',
+      alignItems: 'center',
+      paddingRight: 20,
+      color: red[700],
+      fontWeight: 'bold'
+    },
+    selectOptionIcon: {
+      display: 'inline',
+      alignItems: 'center',
+      verticalAlign: 'bottom',
+      color: red[700],
+      paddingLeft: 10
+    },
+    selectOptionButton: {
+      fontWeight: 'bold'
+    }
+   
   }));
 
   
@@ -237,7 +259,7 @@ function ParkNRideInfo(props) {
                 />
             </Grid>
             <Grid item xs={12} md={6}>
-                <header>Departure Choice</header>
+                <header>ParkNRide Information</header>
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
                     Departure
@@ -253,124 +275,25 @@ function ParkNRideInfo(props) {
                       <em>None</em>
                     </MenuItem>
                     <MenuItem value="NLPREMIUM">
-                        <Button variant="contained" color="primary"><NavigationIcon className={classes.extendedIcon} />Hello</Button><Button variant="contained" color="white">World</Button>
+                        <Paper>
+                          <Button variant="contained" color="primary" className={classes.selectOptionButton}>
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;Hello
+                          </Button>
+                          <Typography component="p" className={classes.selectOptionIcon}>
+                            <LocationOnIcon />
+                          </Typography>
+                          <Typography component="p" className={classes.selectOption}>
+                            Tada da a
+                          </Typography>
+                        </Paper>
                     </MenuItem>
-                    <MenuItem value="NLPREMIUMXL">
-                    <Button variant="contained" color="primary">Hello</Button><Button variant="contained" color="white">World</Button>
-                    </MenuItem>
-                    <MenuItem value="NLSUPERSTAR">
-                    <Button variant="contained" color="primary">Hello</Button><Button variant="contained" color="white">World</Button>
-                    </MenuItem>
+                    
                   </Select>
                 </FormControl>
-                {/*<KeyboardDatePicker
-                    id="outlined-name"
-                    label="Date"
-                    className={classes.textFieldTravelInfo}
-                    value={props.bookingInfo.departureDate}
-                    onChange={handleDateInput('departureDate')}
-                    margin="normal"
-                    variant="outlined"
-                    inputVariant="outlined"
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                />
-                <KeyboardTimePicker
-                    id="outlined-name"
-                    label="Time"
-                    className={classes.textFieldTravelInfo}
-                    value={props.bookingInfo.departureTime}
-                    onChange={handleTimeInput('departureTime')}
-                    margin="normal"
-                    variant="outlined"
-                    inputVariant="outlined"
-                />
-               
-                <div style={{ position: 'relative'}}>
-                    <MUIPlacesAutocomplete
-                        id="outlined-name"
-                        label="Pickup Location"
-                        value={props.bookingInfo.departurePickUpLocation}
-                        onChange={handleChange('departurePickUpLocation')}
-                        margin="normal"
-                        variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedDeparturePickUp}
-                        createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
-                    />
-                </div>
-
-                <div style={{ position: 'relative'}}>
-                    <MUIPlacesAutocomplete
-                        id="outlined-name"
-                        label="Destination"
-                        value={props.bookingInfo.departureDropOffLocation}
-                        onChange={handleChange('departureDropOffLocation')}
-                        margin="normal"
-                        variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedDepartureDropOff}
-                        createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
-                    />
-                    </div>*/}
-                <header>Return Choice</header>
-                {/*<KeyboardDatePicker
-                    id="outlined-name"
-                    label="Date"
-                    className={classes.textFieldTravelInfo}
-                    value={props.bookingInfo.returnDate}
-                    onChange={handleDateInput('returnDate')}
-                    margin="normal"
-                    variant="outlined"
-                    inputVariant="outlined"
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
-                />
                 
-                <KeyboardTimePicker
-                    id="outlined-name"
-                    label="Time"
-                    className={classes.textFieldTravelInfo}
-                    value={props.bookingInfo.returnTime}
-                    onChange={handleTimeInput('returnTime')}
-                    margin="normal"
-                    variant="outlined"
-                    inputVariant="outlined"
-                />
-                
-                <div style={{ position: 'relative'}}>
-                    <MUIPlacesAutocomplete
-                        id="outlined-name"
-                        label="Dropoff Location"
-                        value={props.bookingInfo.returnDropOffLocation}
-                        onChange={handleChange('returnDropOffLocation')}
-                        margin="normal"
-                        variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedReturnDropOff}
-                        createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
-                    />
-                </div>*/}
-                <header>Vehicle Type</header>
-                {/*<TextField
-                    id="numberOfPeople"
-                    label="Number of People"
-                    className={classes.textField}
-                    value={values.numberOfPeople}
-                    onChange={handleChange('numberOfPeople')}
-                    margin="normal"
-                    variant="outlined"
-                    type="number"
-                    fullWidth={true}
-                />*/}
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
-                    Vehicle Type
+                    Return
                   </InputLabel>
                   <Select
                     label="Time"
@@ -382,19 +305,35 @@ function ParkNRideInfo(props) {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="NLPREMIUM">NL PREMUIM</MenuItem>
-                    <MenuItem value="NLPREMIUMXL">NL PREMUIM XL</MenuItem>
-                    <MenuItem value="NLSUPERSTAR">NL SUPERSTAR</MenuItem>
+                    <MenuItem value="NLPREMIUM">
+                        <Paper>
+                          <Button variant="contained" color="primary" className={classes.selectOptionButton}>
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;Hello
+                          </Button>
+                          <Typography component="p" className={classes.selectOptionIcon}>
+                            <LocationOnIcon />
+                          </Typography>
+                          <Typography component="p" className={classes.selectOption}>
+                            Tada da a
+                          </Typography>
+                        </Paper>
+                    </MenuItem>
+                    
                   </Select>
                 </FormControl>
-                <FormControl variant="outlined" className={classes.formControl}>
-                <FormControlLabel
-                  control={
-                    <Checkbox checked={values.trailerRequired} onChange={handleTrailerRequiredChecked('trailerRequired')} value="trailerRequired" color="Primary"/>
-                  }
-                  label="Trailer required?"
+               
+                
+                  <TextField
+                    id="numberOfPeople"
+                    label="Number of People"
+                    className={classes.textField}
+                    value={values.numberOfPeople}
+                    onChange={handleChange('numberOfPeople')}
+                    margin="normal"
+                    variant="outlined"
+                    type="number"
+                    fullWidth={true}
                 />
-                </FormControl>
                 
             </Grid>
         </Grid>

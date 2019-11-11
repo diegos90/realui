@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -10,8 +10,10 @@ import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ParkNRideInfo from '../../components/ParkNRideInfo';
-const backgroundShape = require('../../images/mainBackground.png');
+import axios from 'axios';
+import queryString from 'query-string';
 
+const backgroundShape = require('../../images/mainBackground.png');
 const useStyles = makeStyles => (theme => ({
   root: {
     flexGrow: 1,
@@ -37,44 +39,73 @@ const useStyles = makeStyles => (theme => ({
   }
 }));
 
-const parkNRideInfo = {
-  name: '',
-  email: '',
-  cellNumber: '',
-  departureDate: Date(),
-  departureTime: Date(),
-  departurePickUpLocation: {},
-  departureDropOffLocation: {},
-  returnDate: Date(),
-  returnTime: Date(),
-  returnPickUpLocation: {},
-  returnDropOffLocation: {},
-  vehicleType: '',
-  trailerRequired: true
-}
+
 
 function getSteps() {
   return ['ParkNRide Information', 'Quotation', 'Make Payment'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-        return <ParkNRideInfo bookingInfo={parkNRideInfo}/>;
-    case 1:   
-        return <Quote bookingInfo={parkNRideInfo} />;
-    case 2:
-      return <Payment />;
-    default:
-      return 'Unknown step';
-  }
-}
 
 
-export default function ParkNRide() {
+
+export default function ParkNRide(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+
+  const parkNRideInfo = {
+    name: '',
+    email: '',
+    cellNumber: '',
+    departureDate: Date(),
+    departureTime: Date(),
+    departurePickUpLocation: {},
+    departureDropOffLocation: {},
+    returnDate: Date(),
+    returnTime: Date(),
+    returnPickUpLocation: {},
+    returnDropOffLocation: {},
+    vehicleType: '',
+    trailerRequired: true,
+    event: {},
+    event_id: queryString.parse(props.location.search).event_id,
+    selectedDeparture: "",
+    selectedReturn: "",
+    numberOfPeople: 1
+  }
+
+  useEffect(() => async () =>{
+    let params = queryString.parse(props.location.search)
+    parkNRideInfo.event_id = queryString.parse(props.location.search)
+    await getEventInfo(params.event_id)
+  });
+
+  const getEventInfo = async (event_id) => {
+    let event = {}
+    await axios.get('https://nite-life-d891a.firebaseio.com/events/'+event_id+'.json')
+        .then(res => {
+          event = res.data
+          //setQuote(recievedQuote)
+          //setShow(true)
+        })
+    parkNRideInfo.event = event
+  }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+          let params = queryString.parse(props.location.search)
+          getEventInfo(params.event_id)
+          return <ParkNRideInfo bookingInfo={parkNRideInfo}/>;
+      case 1:   
+          return <Quote bookingInfo={parkNRideInfo} />;
+      case 2:
+        return <Payment />;
+      default:
+        return 'Unknown step';
+    }
+  }
+
   const nextButtonContent = ["Make Booking", "Make Payment", "Next..."]
   const steps = getSteps();
 

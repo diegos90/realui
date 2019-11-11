@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles  } from '@material-ui/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -8,21 +8,18 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import LocationOnIcon from '@material-ui/icons/Room';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors'
+import axios from 'axios';
+import { CircularProgress } from '@material-ui/core';
 
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
 } from '@material-ui/pickers';
-import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete';
 
 
 const useStyles = makeStyles(theme => ({
@@ -99,129 +96,54 @@ function ParkNRideInfo(props) {
     returnPickUpLocation: {},
     returnDropOffLocation: {},
     vehicleType: '',
-    trailerRequired: null
+    trailerRequired: null,
+    selectedDeparture: "",
+    selectedReturn: "",
+    numberOfPeople: 1
   });
 
+  let [event, setEvent] = React.useState({});
+  const [show, setShow] = React.useState(false);
+
+  const getEventInfo = async (event_id) => {
+    let e = {}
+    await axios.get('https://nite-life-d891a.firebaseio.com/events/'+event_id+'.json')
+        .then(res => {
+          e= res.data
+          setEvent(e)
+          event = e
+          setShow(true)
+        })
+  }
+
+  useEffect(() => {
+    getEventInfo(props.bookingInfo.event_id)
+  }, []);
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
     props.bookingInfo[name] = event.target.value;
   };
 
-  const handleDateInput = name => event => {
-    setValues({ ...values, [name]: event });
-    props.bookingInfo[name] = event;
+  const handleDepartureSelect = e => {
+    props.bookingInfo["selectedDeparture"] = e.target.value;
+    setValues({ ...values, ['selectedDeparture']: e.target.value });
+    console.log(values.selectedDeparture);
   }
 
-  const handleTimeInput = name => event => {
-    setValues({ ...values, [name]: event });
-    props.bookingInfo[name] = event;
+  const handleReturnSelect = e => {
+    props.bookingInfo["selectedReturn"] = e.target.value;
+    setValues({ ...values, ['selectedReturn']: e.target.value });
+    console.log(props.bookingInfo.selectedReturn);
   }
 
-  const handleVehicleTypeSelect = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-    props.bookingInfo['vehicleType'] = event.target.value;
-  }
-
-  const handleTrailerRequiredChecked = name => event => {
-    setValues({ ...values, [name]: event.target.checked });
-    props.bookingInfo[name] = event.target.checked;
-  };
-
-  const onSuggestionSelectedDeparturePickUp = suggestion => {
-      geocodeByPlaceID(suggestion.place_id).then((results) => {
-        const { geometry } = results[0]
-        values.departurePickUpLocation.description = suggestion.description;
-        values.departurePickUpLocation.lat = geometry.location.lat();
-        values.departurePickUpLocation.lng = geometry.location.lng();
-
-        props.bookingInfo.departurePickUpLocation.description = suggestion.description;
-        props.bookingInfo.departurePickUpLocation.lat = geometry.location.lat();
-        props.bookingInfo.departurePickUpLocation.lng = geometry.location.lng();
-
-    }).catch((err) => {
-        console.log(err)
-      })
-  }
-
-  const onSuggestionSelectedDepartureDropOff = suggestion => {
-    geocodeByPlaceID(suggestion.place_id).then((results) => {
-      const { geometry } = results[0]      
-      values.departureDropOffLocation.description = suggestion.description;
-      values.departureDropOffLocation.lat = geometry.location.lat();
-      values.departureDropOffLocation.lng = geometry.location.lng();
-
-      props.bookingInfo.departureDropOffLocation.description = suggestion.description;
-      props.bookingInfo.departureDropOffLocation.lat = geometry.location.lat();
-      props.bookingInfo.departureDropOffLocation.lng = geometry.location.lng();
-
-      //RETURN PICKUP:
-      onSuggestionSelectedReturnPickUp(suggestion)
-
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-
-
-  const onSuggestionSelectedReturnPickUp = suggestion => {
-    console.log(suggestion)
-    geocodeByPlaceID(suggestion.place_id).then((results) => {
-
-      const { geometry } = results[0]
-      
-      values.returnPickUpLocation.description = suggestion.description;
-      values.returnPickUpLocation.lat = geometry.location.lat();
-      values.returnPickUpLocation.lng = geometry.location.lng();
-
-      props.bookingInfo.returnPickUpLocation.description = suggestion.description;
-      props.bookingInfo.returnPickUpLocation.lat = geometry.location.lat();
-      props.bookingInfo.returnPickUpLocation.lng = geometry.location.lng();
-
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-
-
-  const onSuggestionSelectedReturnDropOff = suggestion => {
-    console.log(suggestion)
-    geocodeByPlaceID(suggestion.place_id).then((results) => {
-      const { geometry } = results[0]
-      values.returnDropOffLocation.description = suggestion.description;
-      values.returnDropOffLocation.lat = geometry.location.lat();
-      values.returnDropOffLocation.lng = geometry.location.lng();
-
-      props.bookingInfo.returnDropOffLocation.description = suggestion.description;
-      props.bookingInfo.returnDropOffLocation.lat = geometry.location.lat();
-      props.bookingInfo.returnDropOffLocation.lng = geometry.location.lng();
-
-    }).catch((err) => {
-      console.log(err)
-    })
-  }
-
-
-  function createAutocompleteRequest(inputValue) {
-    // Restrict the returned suggestions to those that:
-    // 1) Are in Bellingham (latitude 48.7519, longitude 122.4787)
-    // 2) Are within ~3 miles (5000 meters)
-    // 3) Have an address associated with them
-    return {
-      input: inputValue,
-      types: ['geocode', 'establishment'],
-      location: { lat: () => -34.2969541, lng: () => 18.2479026 },
-      radius: 1000,
-    }
-  }
 
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      {show ? (
         <Grid container  alignContent='center'>
+        
             <Grid item xs={12} md={6}>
             <header>Billing Information</header>
                 <TextField
@@ -266,28 +188,30 @@ function ParkNRideInfo(props) {
                   </InputLabel>
                   <Select
                     label="Time"
-                    value={props.bookingInfo.vehicleType}
-                    onChange={handleVehicleTypeSelect}
+                    value={props.bookingInfo.selectedDeparture}
+                    onChange={handleDepartureSelect}
                     input={<OutlinedInput name="vehicleType" id="outlined-name" />}
                     
                   >
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="NLPREMIUM">
+                    {
+                        event.tripOptions.departures.map((key, index) => 
+                    <MenuItem key={index} value={key}>
                         <Paper>
                           <Button variant="contained" color="primary" className={classes.selectOptionButton}>
-                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;Hello
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{key.datetime}
                           </Button>
                           <Typography component="p" className={classes.selectOptionIcon}>
                             <LocationOnIcon />
                           </Typography>
                           <Typography component="p" className={classes.selectOption}>
-                            Tada da a
+                          {key.location}
                           </Typography>
                         </Paper>
                     </MenuItem>
-                    
+                    )}
                   </Select>
                 </FormControl>
                 
@@ -297,27 +221,30 @@ function ParkNRideInfo(props) {
                   </InputLabel>
                   <Select
                     label="Time"
-                    value={props.bookingInfo.vehicleType}
-                    onChange={handleVehicleTypeSelect}
+                    value={props.bookingInfo.selectedReturn}
+                    onChange={handleReturnSelect}
                     input={<OutlinedInput name="vehicleType" id="outlined-name" />}
                     
                   >
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="NLPREMIUM">
+                    {
+                        event.tripOptions.returns.map((key, index) => 
+                    <MenuItem key={index} value={key}>
                         <Paper>
                           <Button variant="contained" color="primary" className={classes.selectOptionButton}>
-                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;Hello
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{key.datetime}
                           </Button>
                           <Typography component="p" className={classes.selectOptionIcon}>
                             <LocationOnIcon />
                           </Typography>
                           <Typography component="p" className={classes.selectOption}>
-                            Tada da a
+                          {key.location}
                           </Typography>
                         </Paper>
                     </MenuItem>
+                    )}
                     
                   </Select>
                 </FormControl>
@@ -332,11 +259,16 @@ function ParkNRideInfo(props) {
                     margin="normal"
                     variant="outlined"
                     type="number"
+                    inputProps={{min: 1}}
                     fullWidth={true}
                 />
                 
             </Grid>
+            
         </Grid>
+        ) : (
+          <center><CircularProgress /></center>
+        )}
         </MuiPickersUtilsProvider>
   );
 }

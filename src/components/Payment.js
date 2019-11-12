@@ -85,7 +85,7 @@ function Payment(props) {
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
-                    fullWidth={false}
+                    fullWidth={true}
                     onFocus={flipToFront}
                     onChange={handleCardNumberInput}
                     inputProps={{ maxLength: 16 }}
@@ -96,7 +96,7 @@ function Payment(props) {
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
-                    fullWidth={false}
+                    fullWidth={true}
                     onFocus={flipToFront}
                     onChange={handleCardExpiryDateInput}
                     inputProps={{ maxLength: 5, pattern: "[A-Za-z]+" }}
@@ -109,7 +109,7 @@ function Payment(props) {
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
-                    fullWidth={false}
+                    fullWidth={true}
                     onFocus={flipToFront}
                     onChange={handleCardHolderNameInput}
                 />
@@ -119,7 +119,7 @@ function Payment(props) {
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
-                    fullWidth={false}
+                    fullWidth={true}
                     onFocus={flipToBack}
                     onChange={handleCardCVVInput}
                     inputProps={{ maxLength: 3 }}

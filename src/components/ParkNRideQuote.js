@@ -66,7 +66,7 @@ function ParkNRideQuote(props) {
           alignItems="center"
           justify="center" spacing={2}>
             <Grid item xs />
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
             {show ? (
                         <Paper className={classes.root}>
                         <Typography variant="h5" component="h3">

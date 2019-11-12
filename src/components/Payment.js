@@ -54,7 +54,7 @@ function Payment(props) {
         alignItems="center"
         justify="center" spacing={2}>
             <Grid item xs />
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Paper className={classes.root}>
                 <PaymentCard
                 className={classes.creditCard}

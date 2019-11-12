@@ -5,7 +5,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import BookingInfo from '../../components/BookingInfo';
-import Quote from '../../components/Quote';
+import ParkNRideQuote from '../../components/ParkNRideQuote';
 import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -46,12 +46,7 @@ function getSteps() {
 }
 
 
-
-
 export default function ParkNRide(props) {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
 
   const parkNRideInfo = {
     name: '',
@@ -68,15 +63,22 @@ export default function ParkNRide(props) {
     vehicleType: '',
     trailerRequired: true,
     event: {},
-    event_id: queryString.parse(props.location.search).event_id,
+    event_id: "",
     selectedDeparture: "",
     selectedReturn: "",
-    numberOfPeople: 1
+    numberOfPeople: 0
   }
+
+
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set());
+
+ 
 
   useEffect(() => async () =>{
     let params = queryString.parse(props.location.search)
-    parkNRideInfo.event_id = queryString.parse(props.location.search)
+    parkNRideInfo.event_id = queryString.parse(props.location.search).event_id
     await getEventInfo(params.event_id)
   });
 
@@ -96,9 +98,10 @@ export default function ParkNRide(props) {
       case 0:
           let params = queryString.parse(props.location.search)
           getEventInfo(params.event_id)
+          parkNRideInfo.event_id = params.event_id
           return <ParkNRideInfo bookingInfo={parkNRideInfo}/>;
       case 1:   
-          return <Quote bookingInfo={parkNRideInfo} />;
+          return <ParkNRideQuote bookingInfo={parkNRideInfo} />;
       case 2:
         return <Payment />;
       default:

@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   };
 
 
-function Quote(props) {
+function ParkNRideQuote(props) {
   const classes = useStyles();
   const [quote, setQuote] = React.useState({});
   const [show, setShow] = React.useState(false);
@@ -46,10 +46,11 @@ function Quote(props) {
 
   const getBookingQuote = async (bookingInfo) => {
     let recievedQuote = {}
-    await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
+    console.log({ 'bookingInfo' : bookingInfo })
+    await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/getparknrideprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
           recievedQuote = res.data
-          setQuote(recievedQuote)
+          setQuote({price: recievedQuote})
           setShow(true)
         })
 
@@ -69,7 +70,7 @@ function Quote(props) {
             {show ? (
                         <Paper className={classes.root}>
                         <Typography variant="h5" component="h3">
-                          Your Party Cab quote is: 
+                          Your ParkNRide quote is: 
                         </Typography>
                         <Typography component="p">
                           Billed to: {props.bookingInfo.name}
@@ -77,12 +78,12 @@ function Quote(props) {
                         <Typography component="p">
                           Email: {props.bookingInfo.email}
                         </Typography>
-                        <Typography component="p">
+                        {/*<Typography component="p">
                           Departure: {quote.departureTrip.distance}
                         </Typography> 
                         <Typography component="p">
                           Return: {quote.returnTrip.distance}
-                        </Typography>
+            </Typography>*/}
                         <Typography variant="h4" component="h3" className={classes.price}>
                         R {formatMoney(quote.price)}
                         </Typography>
@@ -97,4 +98,4 @@ function Quote(props) {
   );
 }
 
-export default Quote;
+export default ParkNRideQuote;

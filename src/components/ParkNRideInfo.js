@@ -126,13 +126,13 @@ function ParkNRideInfo(props) {
   };
 
   const handleDepartureSelect = e => {
-    props.bookingInfo["selectedDeparture"] = e.target.value;
+    props.bookingInfo.selectedDeparture = e.target.value;
     setValues({ ...values, ['selectedDeparture']: e.target.value });
-    console.log(values.selectedDeparture);
+    console.log(props.bookingInfo.selectedDeparture);
   }
 
   const handleReturnSelect = e => {
-    props.bookingInfo["selectedReturn"] = e.target.value;
+    props.bookingInfo.selectedReturn = e.target.value;
     setValues({ ...values, ['selectedReturn']: e.target.value });
     console.log(props.bookingInfo.selectedReturn);
   }

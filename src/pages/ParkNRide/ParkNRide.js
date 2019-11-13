@@ -68,9 +68,6 @@ function getSteps() {
 
 export default function ParkNRide(props) {
 
-  
-
-  alert("its a dfunctioon")
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());

@@ -40,6 +40,26 @@ const useStyles = makeStyles => (theme => ({
 }));
 
 
+const parkNRideInfo = {
+  name: '',
+  email: '',
+  cellNumber: '',
+  departureDate: Date(),
+  departureTime: Date(),
+  departurePickUpLocation: {},
+  departureDropOffLocation: {},
+  returnDate: Date(),
+  returnTime: Date(),
+  returnPickUpLocation: {},
+  returnDropOffLocation: {},
+  vehicleType: '',
+  trailerRequired: true,
+  event: {},
+  event_id: "",
+  selectedDeparture: "",
+  selectedReturn: "",
+  numberOfPeople: 0
+}
 
 function getSteps() {
   return ['ParkNRide Information', 'Quotation', 'Make Payment'];
@@ -48,28 +68,9 @@ function getSteps() {
 
 export default function ParkNRide(props) {
 
-  const parkNRideInfo = {
-    name: '',
-    email: '',
-    cellNumber: '',
-    departureDate: Date(),
-    departureTime: Date(),
-    departurePickUpLocation: {},
-    departureDropOffLocation: {},
-    returnDate: Date(),
-    returnTime: Date(),
-    returnPickUpLocation: {},
-    returnDropOffLocation: {},
-    vehicleType: '',
-    trailerRequired: true,
-    event: {},
-    event_id: "",
-    selectedDeparture: "",
-    selectedReturn: "",
-    numberOfPeople: 0
-  }
+  
 
-
+  alert("its a dfunctioon")
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());

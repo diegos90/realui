@@ -50,6 +50,8 @@ function ParkNRideQuote(props) {
     await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/getparknrideprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
           recievedQuote = res.data
+          console.log("tutytyty: ", recievedQuote)
+          props.bookingInfo.price = recievedQuote
           setQuote({price: recievedQuote})
           setShow(true)
         })

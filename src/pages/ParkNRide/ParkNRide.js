@@ -58,7 +58,7 @@ const parkNRideInfo = {
   event_id: "",
   selectedDeparture: "",
   selectedReturn: "",
-  numberOfPeople: 0
+  numberOfPeople: 1
 }
 
 function getSteps() {
@@ -74,7 +74,7 @@ export default function ParkNRide(props) {
 
  
 
-  useEffect(() => async () =>{
+  useEffect(() => async () => {
     let params = queryString.parse(props.location.search)
     parkNRideInfo.event_id = queryString.parse(props.location.search).event_id
     await getEventInfo(params.event_id)
@@ -91,6 +91,14 @@ export default function ParkNRide(props) {
     parkNRideInfo.event = event
   }
 
+  async function recordPayment(){
+    console.log(parkNRideInfo)
+    await axios.post(`https://nite-life-d891a.firebaseio.com/sales/parknride.json`, { ...parkNRideInfo })
+        .then(res => {
+          console.log("done")
+        })
+  }
+
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -101,7 +109,7 @@ export default function ParkNRide(props) {
       case 1:   
           return <ParkNRideQuote bookingInfo={parkNRideInfo} />;
       case 2:
-        return <Payment />;
+        return <Payment bookingInfo={parkNRideInfo} />;
       default:
         return 'Unknown step';
     }
@@ -120,6 +128,9 @@ export default function ParkNRide(props) {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+
+    if(activeStep === steps.length - 1)
+      recordPayment()
       
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);

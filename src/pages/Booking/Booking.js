@@ -9,6 +9,7 @@ import Quote from '../../components/Quote';
 import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import axios from 'axios';
 
 const backgroundShape = require('../../images/mainBackground.png');
 
@@ -61,7 +62,7 @@ function getStepContent(step) {
     case 1:   
         return <Quote bookingInfo={bookingInfo} />;
     case 2:
-      return <Payment />;
+      return <Payment bookingInfo={bookingInfo}/>;
     default:
       return 'Unknown step';
   }
@@ -85,6 +86,9 @@ export default function Booking() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+
+    if(activeStep === steps.length - 1)
+      recordPayment()
       
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -99,6 +103,13 @@ export default function Booking() {
     setActiveStep(0);
   }
 
+  async function recordPayment(){
+    console.log(bookingInfo)
+    await axios.post(`https://nite-life-d891a.firebaseio.com/sales/booknow.json`, { ...bookingInfo })
+        .then(res => {
+          console.log("done")
+        })
+  }
   
   return (
     <React.Fragment>

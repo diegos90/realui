@@ -49,6 +49,9 @@ function Quote(props) {
     await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
           recievedQuote = res.data
+          props.bookingInfo.price = recievedQuote.price
+          props.bookingInfo.departureTripDistance = recievedQuote.departureTrip.distance
+          props.bookingInfo.returnTripDistance = recievedQuote.returnTrip.distance
           setQuote(recievedQuote)
           setShow(true)
         })

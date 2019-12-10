@@ -76,6 +76,8 @@ function Payment(props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth={true}
+                    contentEditable={false}
+                    value={props.bookingInfo.price}
                 />
                 </div>
                 <div>
@@ -99,7 +101,7 @@ function Payment(props) {
                     fullWidth={true}
                     onFocus={flipToFront}
                     onChange={handleCardExpiryDateInput}
-                    inputProps={{ maxLength: 5, pattern: "[A-Za-z]+" }}
+                    inputProps={{ maxLength: 5, pattern: "[0-9]" }}
                 />
                 </div>
                 <div>

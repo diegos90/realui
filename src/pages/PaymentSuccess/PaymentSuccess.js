@@ -120,7 +120,7 @@ const styles = theme => ({
 
 const monthRange = Months;
 
-class OurStory extends Component {
+class PaymentSuccess extends Component {
 
   state = {
     clients: [],
@@ -182,9 +182,6 @@ class OurStory extends Component {
   render() {
     const { classes } = this.props;
     const currentPath = this.props.location.pathname
-    const clientList = this.state.clients.map((client) => 
-      <img src={client.url} className={classes.clientLogo} key={client.id} alt=""/>
-    )
 
     return (
       <React.Fragment>
@@ -196,38 +193,13 @@ class OurStory extends Component {
               <Paper className={classes.paper}>
                 <Paper className={classes.paperHeader}>
                   <Typography variant="h5" component="h3" align="center">
-                    Our Story
+                    Thank you, your payment was successful!
                   </Typography>
                 </Paper>
                 <Grid container justify="center">
                   <Grid item md={8}>
-
-                    <Typography component="p">
-                      A Pretoria student project which transformed into a Rockstar solution to DUI-Free memories.
-                      We began with one Party Cab in Pretoria to a network that stretches all over Gauteng offering:
-                    </Typography>
-                    <Typography component="p">- Party Cabs: A vehicle equipped with sound for a large group of friends, family and colleauges</Typography>
-                    <Typography component="p">- Park N Ride:  Vehicles that assist with patron logistics i.e. from VIP Parking areas to Event location, this is offered to 
-                        event promoters and event goers who would like to carpool with others to the same destination.
-                    </Typography>
-                    <Typography>For best turnaround on quotes and comfirmations, please use our intergrated booking system for instant price esitmates and payments - feel free to contact us for more information</Typography>
-                  </Grid>
-                  <Grid item md={4}>
-                    <Paper style={{backgroundColor: '#fff', marginTop: 20}}>
-                      <Typography variant="h7" component="h7" align="center">
-                        Our Clients
-                      </Typography>
-                        {clientList}
-                    </Paper>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid md={4}>
-              <Paper className={classes.paper}>
-                <Paper className={classes.paperHeader}>
-                  <Typography variant="h7" component="h7" align="center">
-                    Contact Us
+                  <Typography variant="h7" component="p" align="center">
+                    Contact us if you have any information about your booking.
                   </Typography>
                   <Typography component="p" align="center">
                     {this.state.contactDetails.phone}
@@ -235,12 +207,9 @@ class OurStory extends Component {
                   <Typography component="p" align="center">
                     {this.state.contactDetails.email}
                   </Typography>
-                  <TwitterTimelineEmbed 
-                    sourceType="profile"
-                    screenName="NitelifePartyCa"
-                    options={{height:300}}
-                  />
-                </Paper>
+
+                  </Grid>
+                </Grid>
               </Paper>
             </Grid>
           </Grid>
@@ -250,4 +219,4 @@ class OurStory extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(OurStory));
+export default withRouter(withStyles(styles)(PaymentSuccess));

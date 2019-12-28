@@ -7,8 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Months from '../../components/common/Months';
 import axios from 'axios';
-import { TwitterTimelineEmbed} from 'react-twitter-embed';
-
+import Link from '@material-ui/core/Link';
 import Topbar from '../../components/Topbar';
 
 const numeral = require('numeral');
@@ -118,36 +117,18 @@ const styles = theme => ({
   }
 });
 
-const monthRange = Months;
 
-class OurStory extends Component {
+
+class PaymentCancelled extends Component {
 
   state = {
     clients: [],
     contactDetails: {}
   };
 
-  updateValues() {
-    const { amount, period, start } = this.state;
-    const monthlyInterest = (amount)*(Math.pow(0.01*(1.01), period))/(Math.pow(0.01, period - 1))
-    const totalInterest = monthlyInterest * (period + start);
-    const totalPayment = amount + totalInterest;
-    const monthlyPayment = period > start ? totalPayment/(period - start) : totalPayment/(period)
-
-    const data = Array.from({length: period + start}, (value, i) => {
-      const delayed = i < start;
-      return {
-        name: monthRange[i],
-        'Type': delayed ? 0 : Math.ceil(monthlyPayment).toFixed(0),
-        'OtherType': Math.ceil(monthlyInterest).toFixed(0)
-      }
-    })
-
-    this.setState({monthlyInterest, totalInterest, totalPayment, monthlyPayment, data})
-  }
+ 
 
   componentDidMount() {
-    this.updateValues();
     axios.get('https://nite-life-d891a.firebaseio.com/clientlogos.json')
       .then((response) => {
         // handle success
@@ -193,41 +174,16 @@ class OurStory extends Component {
         <div className={classes.root}>
           <Grid container justify="center">
             <Grid item md={6}>
-              <Paper className={classes.paper}>
+            <Paper className={classes.paper}>
                 <Paper className={classes.paperHeader}>
                   <Typography variant="h5" component="h3" align="center">
-                    Our Story
+                    Unfortunately, your payment was cancelled.
                   </Typography>
                 </Paper>
                 <Grid container justify="center">
                   <Grid item md={8}>
-
-                    <Typography component="p">
-                      A Pretoria student project which transformed into a Rockstar solution to DUI-Free memories.
-                      We began with one Party Cab in Pretoria to a network that stretches all over Gauteng offering:
-                    </Typography>
-                    <Typography component="p">- Party Cabs: A vehicle equipped with sound for a large group of friends, family and colleauges</Typography>
-                    <Typography component="p">- Park N Ride:  Vehicles that assist with patron logistics i.e. from VIP Parking areas to Event location, this is offered to 
-                        event promoters and event goers who would like to carpool with others to the same destination.
-                    </Typography>
-                    <Typography>For best turnaround on quotes and comfirmations, please use our intergrated booking system for instant price esitmates and payments - feel free to contact us for more information</Typography>
-                  </Grid>
-                  <Grid item md={4}>
-                    <Paper style={{backgroundColor: '#fff', marginTop: 20}}>
-                      <Typography variant="h7" component="h7" align="center">
-                        Our Clients
-                      </Typography>
-                        {clientList}
-                    </Paper>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid md={4}>
-              <Paper className={classes.paper}>
-                <Paper className={classes.paperHeader}>
-                  <Typography variant="h7" component="h7" align="center">
-                    Contact Us
+                  <Typography variant="h7" component="p" align="center">
+                    Contact us if you need any assistance with your booking.
                   </Typography>
                   <Typography component="p" align="center">
                     {this.state.contactDetails.phone}
@@ -235,14 +191,13 @@ class OurStory extends Component {
                   <Typography component="p" align="center">
                     {this.state.contactDetails.email}
                   </Typography>
-                  <TwitterTimelineEmbed 
-                    sourceType="profile"
-                    screenName="NitelifePartyCa"
-                    options={{height:300}}
-                  />
-                </Paper>
+                  <Typography variant="h7" component="p" align="center">
+                    Visit our <Link href="#/gigguide">GigGuide</Link> for a listing of our ParkNRide services. Visit <Link href="#/booknow">Book Now</Link> to book one of our party cabs.
+                  </Typography>
+                  </Grid>
+                </Grid>
               </Paper>
-            </Grid>
+             </Grid>
           </Grid>
         </div>
       </React.Fragment>
@@ -250,4 +205,4 @@ class OurStory extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(OurStory));
+export default withRouter(withStyles(styles)(PaymentCancelled));

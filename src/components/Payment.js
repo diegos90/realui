@@ -47,6 +47,11 @@ function Payment(props) {
     setCardCVV(event.target.value)
   }
 
+  const click_e7773ab5244c47e4781146f01ca155b3 = aform_reference => {
+    var aform = aform_reference;
+    aform['amount'].value = Math.round( aform['amount'].value*Math.pow( 10,2 ) )/Math.pow( 10,2 );
+  }
+
   return (
         <Grid container
         direction="column"
@@ -79,53 +84,26 @@ function Payment(props) {
                     value={props.bookingInfo.price}
                 />
                 </div>
-                <div>
-                <TextField
-                    id="outlined-name"
-                    label="Card Number"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    onFocus={flipToFront}
-                    onChange={handleCardNumberInput}
-                    inputProps={{ maxLength: 16 }}
-                />
-                <TextField
-                    id="outlined-name"
-                    label="Expiry Date"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    onFocus={flipToFront}
-                    onChange={handleCardExpiryDateInput}
-                    inputProps={{ maxLength: 5, pattern: "[0-9]" }}
-                />
-                </div>
-                <div>
-                <TextField
-                    id="outlined-name"
-                    label="Card Holder"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    onFocus={flipToFront}
-                    onChange={handleCardHolderNameInput}
-                />
-                <TextField
-                    id="outlined-name"
-                    label="CVV"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    fullWidth={true}
-                    onFocus={flipToBack}
-                    onChange={handleCardCVVInput}
-                    inputProps={{ maxLength: 3 }}
-                />
-                </div>
+
+                <form action="https://www.payfast.co.za/eng/process" name="form_e7773ab5244c47e4781146f01ca155b3" onsubmit="return click_e7773ab5244c47e4781146f01ca155b3( this );" method="post">
+                  <input type="hidden" name="cmd" value="_paynow" />
+                  <input type="hidden" name="receiver" value="10200108" />
+                  <input type="hidden" name="item_name" value="Trip2" />
+                  <input type="hidden" name="amount" value={props.bookingInfo.price} />
+                  <input type="hidden" name="item_description" value="" />
+                  <input type="hidden" name="return_url" value="https://www.nitelifepartycabs.co.za/#/paymentsuccess" />
+                  <input type="hidden" name="cancel_url" value="https://www.nitelifepartycabs.co.za/#/paymentcancelled" />
+                  
+                  <table>
+                    <tr>
+                      <td colspan={2} align="center"><input type="image" src="https://www.payfast.co.za/images/buttons/light-small-paynow.png" width="165" height="36" alt="Pay Now" title="Pay Now with PayFast"/></td>
+                    </tr>
+                  </table>
+                </form>
+
+
+                
+                
                 </Paper>
             </Grid>
             <Grid item xs />  

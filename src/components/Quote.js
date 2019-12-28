@@ -46,7 +46,7 @@ function Quote(props) {
 
   const getBookingQuote = async (bookingInfo) => {
     let recievedQuote = {}
-    await axios.post(`https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
+    await axios.post(` https://us-central1-nite-life.cloudfunctions.net/api/gettripprice`, { 'bookingInfo' : bookingInfo })
         .then(res => {
           recievedQuote = res.data
           props.bookingInfo.price = recievedQuote.price

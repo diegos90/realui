@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
     creditCard:{
       margin: 'auto',
       marginBottom: 7
+    },
+    paymentButton:{
+      width: '100%'
     }
   }));
 
@@ -83,18 +86,18 @@ function Payment(props) {
                     contentEditable={false}
                     value={props.bookingInfo.price}
                 />
-                </div>
+                
 
                 <form action="https://www.payfast.co.za/eng/process" name="form_e7773ab5244c47e4781146f01ca155b3" onsubmit="return click_e7773ab5244c47e4781146f01ca155b3( this );" method="post">
                   <input type="hidden" name="cmd" value="_paynow" />
-                  <input type="hidden" name="receiver" value="10200108" />
-                  <input type="hidden" name="item_name" value="Trip2" />
+                  <input type="hidden" name="receiver" value="14805769" />
+                  <input type="hidden" name="item_name" value="NiteLifePartyTrip" />
                   <input type="hidden" name="amount" value={props.bookingInfo.price} />
                   <input type="hidden" name="item_description" value="" />
                   <input type="hidden" name="return_url" value="https://www.nitelifepartycabs.co.za/#/paymentsuccess" />
                   <input type="hidden" name="cancel_url" value="https://www.nitelifepartycabs.co.za/#/paymentcancelled" />
                   
-                  <table>
+                  <table className={classes.paymentButton}>
                     <tr>
                       <td colspan={2} align="center"><input type="image" src="https://www.payfast.co.za/images/buttons/light-small-paynow.png" width="165" height="36" alt="Pay Now" title="Pay Now with PayFast"/></td>
                     </tr>
@@ -102,7 +105,7 @@ function Payment(props) {
                 </form>
 
 
-                
+                </div>
                 
                 </Paper>
             </Grid>

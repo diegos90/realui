@@ -201,7 +201,7 @@ function BookingInfo(props) {
             <Grid item xs={12} md={6}>
             <header>Billing Information</header>
                 <TextField
-                    id="outlined-name"
+                    id="name"
                     label="Name"
                     className={classes.textField}
                     value={props.bookingInfo.name}
@@ -211,7 +211,7 @@ function BookingInfo(props) {
                     fullWidth={true}
                 />
                 <TextField
-                    id="outlined-name"
+                    id="email"
                     label="Email"
                     className={classes.textField}
                     value={props.bookingInfo.email}
@@ -221,7 +221,7 @@ function BookingInfo(props) {
                     fullWidth={true}
                 />
                 <TextField
-                    id="outlined-name"
+                    id="cellNumber"
                     label="Cell Number"
                     className={classes.textField}
                     value={props.bookingInfo.cellNumber}
@@ -237,7 +237,7 @@ function BookingInfo(props) {
             <Grid item xs={12} md={6}>
                 <header>Departure Choice</header>
                 <KeyboardDatePicker
-                    id="outlined-name"
+                    id="departureDate"
                     label="Date"
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.departureDate}
@@ -250,7 +250,7 @@ function BookingInfo(props) {
                       }}
                 />
                 <KeyboardTimePicker
-                    id="outlined-name"
+                    id="departureTime"
                     label="Time"
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.departureTime}
@@ -262,7 +262,7 @@ function BookingInfo(props) {
                
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
-                        id="outlined-name"
+                        id="departurePickUpLocation"
                         label="Pickup Location"
                         value={props.bookingInfo.departurePickUpLocation}
                         onChange={handleChange('departurePickUpLocation')}
@@ -270,14 +270,14 @@ function BookingInfo(props) {
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDeparturePickUp}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        textFieldProps={{ id: 'departurePickUpLocation', variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
 
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
-                        id="outlined-name"
+                        id="departureDropOffLocation"
                         label="Destination"
                         value={props.bookingInfo.departureDropOffLocation}
                         onChange={handleChange('departureDropOffLocation')}
@@ -285,13 +285,13 @@ function BookingInfo(props) {
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDepartureDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        textFieldProps={{ id: 'departureDropOffLocation', variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
                 <header>Return Choice</header>
                 <KeyboardDatePicker
-                    id="outlined-name"
+                    id="returnDate"
                     label="Date"
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.returnDate}
@@ -305,7 +305,7 @@ function BookingInfo(props) {
                 />
                 
                 <KeyboardTimePicker
-                    id="outlined-name"
+                    id="returnTime"
                     label="Time"
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.returnTime}
@@ -316,22 +316,11 @@ function BookingInfo(props) {
                 />
                 
                 <div style={{ position: 'relative'}}>
-                    {/*<MUIPlacesAutocomplete
-                        id="outlined-name"
-                        label="Pickup Location"
-                        value={values.returnPickUpLocation}
-                        onChange={handleChange('returnPickUpLocation')}
-                        margin="normal"
-                        variant="outlined"
-                        onSuggestionSelected={onSuggestionSelectedReturnPickUp}
-                        createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
-                    />*/}
+                   
                 </div>
                 <div style={{ position: 'relative'}}>
                     <MUIPlacesAutocomplete
-                        id="outlined-name"
+                        id="returnDropOffLocation"
                         label="Dropoff Location"
                         value={props.bookingInfo.returnDropOffLocation}
                         onChange={handleChange('returnDropOffLocation')}
@@ -339,22 +328,12 @@ function BookingInfo(props) {
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedReturnDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        textFieldProps={{ id: 'returnDropOffLocation',variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
                 <header>Vehicle Type</header>
-                {/*<TextField
-                    id="numberOfPeople"
-                    label="Number of People"
-                    className={classes.textField}
-                    value={values.numberOfPeople}
-                    onChange={handleChange('numberOfPeople')}
-                    margin="normal"
-                    variant="outlined"
-                    type="number"
-                    fullWidth={true}
-                />*/}
+      
                 <FormControl variant="outlined" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
                     Vehicle Type
@@ -363,7 +342,7 @@ function BookingInfo(props) {
                     label="Time"
                     value={props.bookingInfo.vehicleType}
                     onChange={handleVehicleTypeSelect}
-                    input={<OutlinedInput name="vehicleType" id="outlined-name" />}
+                    input={<OutlinedInput name="vehicleType" id="vehicleType" />}
                     
                   >
                     <MenuItem value="">
@@ -377,9 +356,10 @@ function BookingInfo(props) {
                 <FormControl variant="outlined" className={classes.formControl}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={values.trailerRequired} onChange={handleTrailerRequiredChecked('trailerRequired')} value="trailerRequired" color="Primary"/>
+                    <Checkbox checked={values.trailerRequired} onChange={handleTrailerRequiredChecked('trailerRequired')} value="trailerRequired" color="primary"/>
                   }
                   label="Trailer required?"
+                  id="trailerRequired"
                 />
                 </FormControl>
                 

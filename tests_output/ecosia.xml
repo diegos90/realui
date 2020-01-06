@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="0">
+
+  <testsuite name="ecosia"
+    errors="1" failures="0" hostname="" id="" package="ecosia" skipped="2"
+    tests="0" time="0.000" timestamp="">
+  
+
+  
+    <system-err>
+      [0;31m  Error: An error occurred while retrieving a new session[0m
+[0;90m       at endReadableNT (_stream_readable.js:1206:12)
+       at processTicksAndRejections (internal/process/task_queues.js:84:21)[0m
+    </system-err>
+  
+
+  
+    
+    <testcase
+      name="step one: navigate to ecosia.org" classname="ecosia">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="step two: click submit" classname="ecosia">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

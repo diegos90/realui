@@ -48,7 +48,8 @@ const bookingInfo = {
   returnPickUpLocation: {},
   returnDropOffLocation: {},
   vehicleType: '',
-  trailerRequired: null
+  trailerRequired: null,
+  type: 'booknow'
 }
 
 function getSteps() {

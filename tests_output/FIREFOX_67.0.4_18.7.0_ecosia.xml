@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="3"
+            failures="0"
+            tests="2">
+
+  <testsuite name="ecosia"
+    errors="3" failures="0" hostname="" id="" package="ecosia" skipped="0"
+    tests="2" time="23.75" timestamp="">
+  
+    <testcase name="step one: open Book Now page" classname="ecosia" time="5.970" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="step two: fill in form" classname="ecosia" time="17.78" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+      [0;31m  NoSuchElementError: An error occurred while running .setValue() command on &lt;input=[id=departureTime]&gt;: invalid selector; Given css selector expression &#34;input=[id=departureTime]&#34; is invalid: SyntaxError: &#39;input=[id=departureTime]&#39; is not a valid selector
+   {&#34;status&#34;:-1,&#34;value&#34;:{&#34;error&#34;:&#34;invalid selector&#34;,&#34;message&#34;:&#34;Given css selector expression \&#34;input=[id=departureTime]\&#34; is invalid: SyntaxError: &#39;input=[id=departureTime]&#39; is not a valid selector&#34;,&#34;stacktrace&#34;:&#34;WebDriverError@chrome://marionette/content/error.js:179:5\nInvalidSelectorError@chrome://marionette/content/error.js:337:5\nfind_@chrome://marionette/content/element.js:374:11\nelement.find/&lt;/findElements&lt;@chrome://marionette/content/element.js:315:17\nevalFn@chrome://marionette/content/sync.js:144:7\nPollPromise/&lt;@chrome://marionette/content/sync.js:160:5\nPollPromise@chrome://marionette/content/sync.js:135:10\nelement.find/&lt;@chrome://marionette/content/element.js:314:24\nelement.find@chrome://marionette/content/element.js:313:10\nfindElementsContent@chrome://marionette/content/listener.js:1150:27\ndispatch/&lt;/req&lt;@chrome://marionette/content/listener.js:479:17\ndispatch/&lt;@chrome://marionette/content/listener.js:474:15\n&#34;},&#34;errorStatus&#34;:&#34;&#34;,&#34;error&#34;:&#34;Given css selector expression \&#34;input=[id=departureTime]\&#34; is invalid: SyntaxError: &#39;input=[id=departureTime]&#39; is not a valid selector&#34;,&#34;httpStatusCode&#34;:400}[0m
+[0;90m       at processTicksAndRejections (internal/process/task_queues.js:97:5)[0m
+[0;31m  NoSuchElementError: An error occurred while running .setValue() command on &lt;input=[id=returnTime]&gt;: invalid selector; Given css selector expression &#34;input=[id=returnTime]&#34; is invalid: SyntaxError: &#39;input=[id=returnTime]&#39; is not a valid selector
+   {&#34;status&#34;:-1,&#34;value&#34;:{&#34;error&#34;:&#34;invalid selector&#34;,&#34;message&#34;:&#34;Given css selector expression \&#34;input=[id=returnTime]\&#34; is invalid: SyntaxError: &#39;input=[id=returnTime]&#39; is not a valid selector&#34;,&#34;stacktrace&#34;:&#34;WebDriverError@chrome://marionette/content/error.js:179:5\nInvalidSelectorError@chrome://marionette/content/error.js:337:5\nfind_@chrome://marionette/content/element.js:374:11\nelement.find/&lt;/findElements&lt;@chrome://marionette/content/element.js:315:17\nevalFn@chrome://marionette/content/sync.js:144:7\nPollPromise/&lt;@chrome://marionette/content/sync.js:160:5\nPollPromise@chrome://marionette/content/sync.js:135:10\nelement.find/&lt;@chrome://marionette/content/element.js:314:24\nelement.find@chrome://marionette/content/element.js:313:10\nfindElementsContent@chrome://marionette/content/listener.js:1150:27\ndispatch/&lt;/req&lt;@chrome://marionette/content/listener.js:479:17\ndispatch/&lt;@chrome://marionette/content/listener.js:474:15\n&#34;},&#34;errorStatus&#34;:&#34;&#34;,&#34;error&#34;:&#34;Given css selector expression \&#34;input=[id=returnTime]\&#34; is invalid: SyntaxError: &#39;input=[id=returnTime]&#39; is not a valid selector&#34;,&#34;httpStatusCode&#34;:400}[0m
+[0;90m       at processTicksAndRejections (internal/process/task_queues.js:97:5)[0m
+[0;31m  NoSuchElementError: An error occurred while running .setValue() command on &lt;input=[id=vehicleType]&gt;: invalid selector; Given css selector expression &#34;input=[id=vehicleType]&#34; is invalid: SyntaxError: &#39;input=[id=vehicleType]&#39; is not a valid selector
+   {&#34;status&#34;:-1,&#34;value&#34;:{&#34;error&#34;:&#34;invalid selector&#34;,&#34;message&#34;:&#34;Given css selector expression \&#34;input=[id=vehicleType]\&#34; is invalid: SyntaxError: &#39;input=[id=vehicleType]&#39; is not a valid selector&#34;,&#34;stacktrace&#34;:&#34;WebDriverError@chrome://marionette/content/error.js:179:5\nInvalidSelectorError@chrome://marionette/content/error.js:337:5\nfind_@chrome://marionette/content/element.js:374:11\nelement.find/&lt;/findElements&lt;@chrome://marionette/content/element.js:315:17\nevalFn@chrome://marionette/content/sync.js:144:7\nPollPromise/&lt;@chrome://marionette/content/sync.js:160:5\nPollPromise@chrome://marionette/content/sync.js:135:10\nelement.find/&lt;@chrome://marionette/content/element.js:314:24\nelement.find@chrome://marionette/content/element.js:313:10\nfindElementsContent@chrome://marionette/content/listener.js:1150:27\ndispatch/&lt;/req&lt;@chrome://marionette/content/listener.js:479:17\ndispatch/&lt;@chrome://marionette/content/listener.js:474:15\n&#34;},&#34;errorStatus&#34;:&#34;&#34;,&#34;error&#34;:&#34;Given css selector expression \&#34;input=[id=vehicleType]\&#34; is invalid: SyntaxError: &#39;input=[id=vehicleType]&#39; is not a valid selector&#34;,&#34;httpStatusCode&#34;:400}[0m
+[0;90m       at processTicksAndRejections (internal/process/task_queues.js:97:5)[0m
+    </system-err>
+  
+
+  
+  </testsuite>
+</testsuites>

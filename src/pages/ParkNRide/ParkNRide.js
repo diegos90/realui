@@ -58,7 +58,8 @@ const parkNRideInfo = {
   event_id: "",
   selectedDeparture: "",
   selectedReturn: "",
-  numberOfPeople: 1
+  numberOfPeople: 1,
+  type: 'parknride'
 }
 
 function getSteps() {

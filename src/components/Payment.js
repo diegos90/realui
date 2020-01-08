@@ -34,7 +34,6 @@ function Payment(props) {
     console.log(props.bookingInfo)
     await axios.post('https://nite-life-d891a.firebaseio.com/sales/'+props.bookingInfo.type+'.json', { ...props.bookingInfo })
         .then(res => {
-          alert("done")
           console.log(res.data.name)
           if(!saleId)
             setSaleId(res.data.name)

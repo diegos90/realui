@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import DateFnsUtils from '@date-io/date-fns';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import axios from 'axios';
 
 import {
   MuiPickersUtilsProvider,
@@ -22,7 +24,7 @@ import MUIPlacesAutocomplete, { geocodeByPlaceID } from 'mui-places-autocomplete
 const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap'
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -31,8 +33,11 @@ const useStyles = makeStyles(theme => ({
       display: 'block'
     },
     formControl: {
-      margin: theme.spacing(1),
+      margin: 'dense',
       minWidth: '90%',
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: '90%',
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -45,14 +50,13 @@ const useStyles = makeStyles(theme => ({
     selectTravelInfo: {
       marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
-        minWidth: 200,
         display: 'inline'
     },
     dense: {
       marginTop: theme.spacing(2),
     },
     menu: {
-      width: 200,
+     
     },
   }));
 
@@ -75,9 +79,20 @@ function BookingInfo(props) {
     returnPickUpLocation: {},
     returnDropOffLocation: {},
     vehicleType: '',
-    trailerRequired: null
+    trailerRequired: null,
+    termsAndConditionsChecked: null
   });
 
+  const [termsAndConditionsURL, setTermsAndConditionsURL] = React.useState();
+  axios.get('https://nite-life-d891a.firebaseio.com/legal/termsandconditions.json')
+      .then((response) => {
+        console.log(response.data)
+        setTermsAndConditionsURL(response.data)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
@@ -103,6 +118,11 @@ function BookingInfo(props) {
   }
 
   const handleTrailerRequiredChecked = name => event => {
+    setValues({ ...values, [name]: event.target.checked });
+    props.bookingInfo[name] = event.target.checked;
+  };
+
+  const handleTermsAndConditionsChecked = name => event => {
     setValues({ ...values, [name]: event.target.checked });
     props.bookingInfo[name] = event.target.checked;
   };
@@ -206,9 +226,10 @@ function BookingInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.name}
                     onChange={handleChange('name')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
+                    size="normal"
                 />
                 <TextField
                     id="email"
@@ -216,9 +237,10 @@ function BookingInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.email}
                     onChange={handleChange('email')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
+                    size="small"
                 />
                 <TextField
                     id="cellNumber"
@@ -226,10 +248,11 @@ function BookingInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.cellNumber}
                     onChange={handleChange('cellNumber')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
                     inputProps={{ maxLength: 13 }}
+                    size="small"
                     
                     
                 />
@@ -242,12 +265,13 @@ function BookingInfo(props) {
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.departureDate}
                     onChange={handleDateInput('departureDate')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     inputVariant="outlined"
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                       }}
+                    size="small"
                 />
                 <KeyboardTimePicker
                     id="departureTime"
@@ -255,9 +279,10 @@ function BookingInfo(props) {
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.departureTime}
                     onChange={handleTimeInput('departureTime')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     inputVariant="outlined"
+                    size="small"
                 />
                
                 <div style={{ position: 'relative'}}>
@@ -266,12 +291,13 @@ function BookingInfo(props) {
                         label="Pickup Location"
                         value={props.bookingInfo.departurePickUpLocation}
                         onChange={handleChange('departurePickUpLocation')}
-                        margin="normal"
+                        margin="dense"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDeparturePickUp}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ id: 'departurePickUpLocation', variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
+                        textFieldProps={{ id: 'departurePickUpLocation', variant: 'outlined', label: 'Pickup Location', className: classes.textField, margin: 'dense', fullWidth: true}} 
+                        renderTarget={() => (<div style={{zIndex:2, color: 'blue'}}/>)}
+                        size="small"
                     />
                 </div>
 
@@ -281,12 +307,12 @@ function BookingInfo(props) {
                         label="Destination"
                         value={props.bookingInfo.departureDropOffLocation}
                         onChange={handleChange('departureDropOffLocation')}
-                        margin="normal"
+                        margin="dense"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedDepartureDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ id: 'departureDropOffLocation', variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'normal', fullWidth: true}} 
-                        renderTarget={() => (<div />)}
+                        textFieldProps={{ id: 'departureDropOffLocation', variant: 'outlined', label: 'Destination', className: classes.textField, margin: 'dense', fullWidth: true}} 
+                        renderTarget={() => (<div style={{zIndex:2, color: 'blue'}}/>)}
                     />
                 </div>
                 <header>Return Choice</header>
@@ -296,7 +322,7 @@ function BookingInfo(props) {
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.returnDate}
                     onChange={handleDateInput('returnDate')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     inputVariant="outlined"
                     KeyboardButtonProps={{
@@ -310,7 +336,7 @@ function BookingInfo(props) {
                     className={classes.textFieldTravelInfo}
                     value={props.bookingInfo.returnTime}
                     onChange={handleTimeInput('returnTime')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     inputVariant="outlined"
                 />
@@ -324,17 +350,17 @@ function BookingInfo(props) {
                         label="Dropoff Location"
                         value={props.bookingInfo.returnDropOffLocation}
                         onChange={handleChange('returnDropOffLocation')}
-                        margin="normal"
+                        margin="dense"
                         variant="outlined"
                         onSuggestionSelected={onSuggestionSelectedReturnDropOff}
                         createAutocompleteRequest={createAutocompleteRequest}
-                        textFieldProps={{ id: 'returnDropOffLocation',variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'normal', fullWidth: true}} 
+                        textFieldProps={{ id: 'returnDropOffLocation',variant: 'outlined', label: 'Dropoff Location', className: classes.textField, margin: 'dense', fullWidth: true}} 
                         renderTarget={() => (<div />)}
                     />
                 </div>
                 <header>Vehicle Type</header>
       
-                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControl variant="outlined" margin="dense" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
                     Vehicle Type
                   </InputLabel>
@@ -342,7 +368,8 @@ function BookingInfo(props) {
                     label="Time"
                     value={props.bookingInfo.vehicleType}
                     onChange={handleVehicleTypeSelect}
-                    input={<OutlinedInput name="vehicleType" id="vehicleType" />}
+                    margin="dense"
+                    input={<OutlinedInput name="vehicleType" id="vehicleType" fullWidth={true}/>}
                     
                   >
                     <MenuItem value="">
@@ -360,6 +387,18 @@ function BookingInfo(props) {
                   }
                   label="Trailer required?"
                   id="trailerRequired"
+                />
+                </FormControl>
+
+                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={values.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
+                  }
+                  label={<Link href={termsAndConditionsURL} target="_blank" rel="noopener" >
+                          I have read and agree to the <u>Terms and Conditions</u>
+                         </Link>}
+                  id="termsAndConditionsChecked"
                 />
                 </FormControl>
                 

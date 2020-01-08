@@ -21,9 +21,8 @@ const styles = theme => ({
   appBar: {
     position: 'sticky',
     boxShadow: 'none',
-    borderBottom: `1px solid ${theme.palette.grey['100']}`,
-    backgroundColor: 'white',
-
+    background: 'none',
+    marginTop: '5em'
   },
   inline: {
     display: 'inline'
@@ -42,12 +41,12 @@ const styles = theme => ({
   },
   productLogo: {
     display: 'inline-block',
-    //borderLeft: `1px solid ${theme.palette.grey['A100']}`,
     marginLeft: 32,
     paddingLeft: 24,
     [theme.breakpoints.up('md')]: {
       paddingTop: '1.5em'
-    }
+    },
+    position: 'absolute'
   },
   tagline: {
     display: 'inline-block',
@@ -63,18 +62,23 @@ const styles = theme => ({
     }
   },
   iconButton: {
-    float: 'right'
+    float: 'right',
+    color: 'white'
   },
   tabContainer: {
-    marginLeft: 32,
+    marginTop:0,
+    marginBottom:0,
+    margin: 'auto',
+    backgroundColor: 'white',
     [theme.breakpoints.down('sm')]: {
       display: 'none'
-    }
+    },
+    borderRadius: 3,
   },
   tabItem: {
     paddingTop: 20,
-    paddingBottom: 20,
-    minWidth: 'auto'
+    paddingBottom: 22,
+    width: 20
   }
 })
 
@@ -132,17 +136,11 @@ class Topbar extends Component {
         <Toolbar>
             <Grid container spacing={10} alignItems="baseline">
               <Grid item xs={12} className={classes.flex}>
-                  <div className={classes.inline}>
-                    <Typography variant="h6" color="inherit" noWrap>
-                      <Link to='/' className={classes.link}>
-                        <img width={120} src={logo} alt="" />
-                      </Link>
-                    </Typography>
-                  </div>
+                  
                   { !this.props.noTabs && (
                     <React.Fragment>
                       <div className={classes.productLogo}>
-                       
+                        <img width={120} src={logo} alt="" />
                       </div>
                       <div className={classes.iconContainer}>
                         <IconButton onClick={this.mobileMenuOpen} className={classes.iconButton} color="inherit" aria-label="Menu">
@@ -162,16 +160,17 @@ class Topbar extends Component {
                         </SwipeableDrawer>
                         <Tabs
                           value={this.current() || this.state.value}
-                          indicatorColor="primary"
-                          textColor="primary"
+                          indicatorColor="inherit"
+                          textColor="inherit"
                           onChange={this.handleChange}
+                          centered
                         >
                           {Menu.map((item, index) => (
                             <Tab key={index} component={Link} to={{pathname: item.pathname, search: this.props.location.search}} classes={{root: classes.tabItem}} label={item.label} />
                           ))}
                           {
-                          (this.current() === 5) ?
-                            <Tab component={Link} to={"#"} classes={{root: classes.tabItem}} label={ "ParkNRide"} /> : <Tab/>
+                          (this.current() === 5) &&
+                            <Tab component={Link} to={"#"} classes={{root: classes.tabItem}} label={ "ParkNRide"} /> 
                           }
                         </Tabs>
                       </div>

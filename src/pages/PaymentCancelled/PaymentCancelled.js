@@ -21,7 +21,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
     background: `url(${backgroundShape}) no-repeat`,
-    opacity: 0.75,
     backgroundSize: 'cover',
     paddingBottom: 200,
   },

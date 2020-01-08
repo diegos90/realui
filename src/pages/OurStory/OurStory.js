@@ -14,16 +14,10 @@ import Topbar from '../../components/Topbar';
 const numeral = require('numeral');
 numeral.defaultFormat('0,000');
 
-const backgroundShape = require('../../images/mainBackground.png');
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
-    background: `url(${backgroundShape}) no-repeat`,
-    opacity: 0.75,
-    backgroundSize: 'cover',
     paddingBottom: 200,
   },
   grid: {

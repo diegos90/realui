@@ -17,12 +17,8 @@ const backgroundShape = require('../../images/mainBackground.png');
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
-    background: `url(${backgroundShape}) no-repeat`,
-    opacity: 0.75,
-    backgroundSize: 'cover',
-    paddingBottom: 200,
+    paddingTop: 30,
   },
   grid: {
     width: 1200,

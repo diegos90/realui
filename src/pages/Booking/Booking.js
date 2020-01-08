@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles  } from '@material-ui/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,18 +14,20 @@ import axios from 'axios';
 
 const backgroundShape = require('../../images/mainBackground.png');
 
-const useStyles = makeStyles => (theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
-    background: `url(${backgroundShape}) no-repeat`,
-    opacity: 0.75,
-    backgroundSize: 'cover',
-    paddingBottom: 200,
-  },
+    
+    },
   booking: {
-    width: '100%',
+    width: '50%',
+    margin:'0 auto', 
+    borderRadius: 10,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+    marginTop: 20
   },
   button: {
     marginRight: theme.spacing(1),
@@ -33,6 +36,9 @@ const useStyles = makeStyles => (theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  informationForm:{
+    backgroundColor: 'white',
+  }
 }));
 
 const bookingInfo = {
@@ -49,7 +55,8 @@ const bookingInfo = {
   returnDropOffLocation: {},
   vehicleType: '',
   trailerRequired: null,
-  type: 'booknow'
+  type: 'booknow',
+  termsAndConditionsChecked: null
 }
 
 function getSteps() {
@@ -117,7 +124,7 @@ export default function Booking() {
     <CssBaseline />
     <Topbar currentPath="/booknow" />
     <div className={classes.root}>
-      <div className={classes.booking}>
+      <div className={classes.booking} >
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -143,7 +150,7 @@ export default function Booking() {
             </Button>
           </div>
         ) : (
-          <div>
+          <div style={{backgroundColor:'white', padding: 20}}>
            {getStepContent(activeStep)}
            <center>
             <div style={{ marginTop: 30}}>

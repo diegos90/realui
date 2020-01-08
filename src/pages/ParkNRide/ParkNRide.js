@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import { makeStyles  } from '@material-ui/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -14,18 +15,19 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const backgroundShape = require('../../images/mainBackground.png');
-const useStyles = makeStyles => (theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.grey['100'],
     overflow: 'hidden',
-    background: `url(${backgroundShape}) no-repeat`,
-    opacity: 0.75,
-    backgroundSize: 'cover',
-    paddingBottom: 200,
   },
   booking: {
-    width: '100%',
+    width: '50%',
+    margin:'0 auto', 
+    borderRadius: 10,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+    marginTop: 20
   },
   button: {
     marginRight: theme.spacing(1),
@@ -59,7 +61,8 @@ const parkNRideInfo = {
   selectedDeparture: "",
   selectedReturn: "",
   numberOfPeople: 1,
-  type: 'parknride'
+  type: 'parknride',
+  termsAndConditionsChecked: null
 }
 
 function getSteps() {
@@ -178,9 +181,10 @@ export default function ParkNRide(props) {
             </Button>
           </div>
         ) : (
-          <div>
+          <div style={{backgroundColor:'white', padding: 20}}>
            {getStepContent(activeStep)}
-            <div className={classes.navigationButtons} style={{width: 400, marginLeft: 'auto', marginRight: 'auto', marginTop: 30}}>
+           <center>
+            <div style={{ marginTop: 30}}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
@@ -194,6 +198,7 @@ export default function ParkNRide(props) {
                 {activeStep === steps.length - 1 ? 'Finish' : nextButtonContent[activeStep]}
               </Button>
             </div>
+            </center>
           </div>
         )}
       </div>

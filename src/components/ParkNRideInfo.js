@@ -16,6 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import {red} from '@material-ui/core/colors'
 import axios from 'axios';
 import { CircularProgress } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
 
 import {
   MuiPickersUtilsProvider,
@@ -26,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
+      backgroundColor: 'white'
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -99,7 +103,8 @@ function ParkNRideInfo(props) {
     trailerRequired: null,
     selectedDeparture: "",
     selectedReturn: "",
-    numberOfPeople: 1
+    numberOfPeople: 1,
+    termsAndConditionsChecked: null
   });
 
   let [event, setEvent] = React.useState({});
@@ -115,6 +120,17 @@ function ParkNRideInfo(props) {
           setShow(true)
         })
   }
+
+  const [termsAndConditionsURL, setTermsAndConditionsURL] = React.useState();
+  axios.get('https://nite-life-d891a.firebaseio.com/legal/termsandconditions.json')
+      .then((response) => {
+        console.log(response.data)
+        setTermsAndConditionsURL(response.data)
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
 
   useEffect(() => {
     getEventInfo(props.bookingInfo.event_id)
@@ -137,12 +153,16 @@ function ParkNRideInfo(props) {
     console.log(props.bookingInfo.selectedReturn);
   }
 
+  const handleTermsAndConditionsChecked = name => event => {
+    setValues({ ...values, [name]: event.target.checked });
+    props.bookingInfo[name] = event.target.checked;
+  };
 
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} >
       {show ? (
-        <Grid container  alignContent='center'>
+        <Grid container alignContent='center' className={classes.container} >
         
             <Grid item xs={12} md={6}>
             <header>Billing Information</header>
@@ -152,7 +172,7 @@ function ParkNRideInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.name}
                     onChange={handleChange('name')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
                 />
@@ -162,7 +182,7 @@ function ParkNRideInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.email}
                     onChange={handleChange('email')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
                 />
@@ -172,7 +192,7 @@ function ParkNRideInfo(props) {
                     className={classes.textField}
                     value={props.bookingInfo.cellNumber}
                     onChange={handleChange('cellNumber')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     fullWidth={true}
                     inputProps={{ maxLength: 13 }}
@@ -182,7 +202,7 @@ function ParkNRideInfo(props) {
             </Grid>
             <Grid item xs={12} md={6}>
                 <header>ParkNRide Information</header>
-                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControl variant="outlined" margin="dense" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
                     Departure
                   </InputLabel>
@@ -190,7 +210,7 @@ function ParkNRideInfo(props) {
                     label="Time"
                     value={props.bookingInfo.selectedDeparture}
                     onChange={handleDepartureSelect}
-                    input={<OutlinedInput name="vehicleType" id="outlined-name" />}
+                    input={<OutlinedInput name="vehicleType" margin="dense" id="outlined-name" />}
                     
                   >
                     <MenuItem value="">
@@ -215,7 +235,7 @@ function ParkNRideInfo(props) {
                   </Select>
                 </FormControl>
                 
-                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControl variant="outlined" margin="dense" className={classes.formControl}>
                   <InputLabel  htmlFor="outlined-name">
                     Return
                   </InputLabel>
@@ -223,7 +243,7 @@ function ParkNRideInfo(props) {
                     label="Time"
                     value={props.bookingInfo.selectedReturn}
                     onChange={handleReturnSelect}
-                    input={<OutlinedInput name="vehicleType" id="outlined-name" />}
+                    input={<OutlinedInput name="vehicleType" margin="dense" id="outlined-name" />}
                     
                   >
                     <MenuItem value="">
@@ -256,12 +276,24 @@ function ParkNRideInfo(props) {
                     className={classes.textField}
                     value={values.numberOfPeople}
                     onChange={handleChange('numberOfPeople')}
-                    margin="normal"
+                    margin="dense"
                     variant="outlined"
                     type="number"
                     inputProps={{min: 1}}
                     fullWidth={true}
                 />
+
+                <FormControl variant="outlined" className={classes.formControl}>
+                <FormControlLabel
+                  control={
+                    <Checkbox checked={values.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
+                  }
+                  label={<Link href={termsAndConditionsURL} target="_blank" rel="noopener" >
+                          I have read and agree to the <u>Terms and Conditions</u>
+                         </Link>}
+                  id="termsAndConditionsChecked"
+                />
+                </FormControl>
                 
             </Grid>
             

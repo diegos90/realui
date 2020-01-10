@@ -375,8 +375,8 @@ function BookingInfo(props) {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="NLPREMIUM">NL PREMIUM</MenuItem>
-                    <MenuItem value="NLPREMIUMXL">NL PREMIUM XL</MenuItem>
+                    <MenuItem value="NLSTUDIO">NL STUDIO</MenuItem>
+                    <MenuItem value="NLSTUDIOXL">NL STUDIO XL</MenuItem>
                     <MenuItem value="NLSUPERSTAR">NL SUPERSTAR</MenuItem>
                   </Select>
                 </FormControl>

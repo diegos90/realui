@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Topbar from './Topbar';
 import axios from 'axios';
-import FeedItemCard from './FeedItemCard'
+import HomeDisplay from './HomeDisplay'
 
 const backgroundShape = require('../images/mainBackground.png');
 
@@ -106,21 +106,6 @@ class Main extends Component {
         console.log(error);
       })
 
-      axios.get('https://nite-life-d891a.firebaseio.com/events.json')
-      .then((response) => {
-        // handle success
-        let arr = []
-        Object.keys(response.data).forEach(function (item) {
-            response.data[item].id = item
-            arr.push(response.data[item])
-        });
-        this.setState({events: arr})
-        console.log(this.state.events)
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
   }
 
   render() {
@@ -129,7 +114,7 @@ class Main extends Component {
     <Grid container justify="center" key={feed.id}>
       <Grid item xs />
       <Grid item xs={12} md={6} justify="center" container>
-        <FeedItemCard mediaUrl={feed.mediaUrl} mediaType={feed.mediaType} description={feed.description} title={feed.title}/>
+        <HomeDisplay mediaUrl={feed.mediaUrl} mediaType={feed.mediaType} description={feed.description} title={feed.title}/>
       </Grid>
       <Grid item xs />
     </Grid>
@@ -139,7 +124,11 @@ class Main extends Component {
         <CssBaseline />
         <Topbar />
         <div className={classes.root}>
-            {feedList}
+          <Grid container justify="center" >
+            <Grid item xs={12} md={12} justify="center" container>
+              <HomeDisplay />
+            </Grid>
+          </Grid>
         </div>
       </React.Fragment>
     )

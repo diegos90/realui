@@ -50,7 +50,7 @@ function EventCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="Recipe" className={classes.avatar}>
-            R
+            NL
           </Avatar>
         }
         action={
@@ -67,7 +67,7 @@ function EventCard(props) {
         image={props.imageUrl}
         title="Paella dish"
       />
-      <CardContent>
+      <CardContent style={{height: 100}}>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.description}
         </Typography>
@@ -79,16 +79,7 @@ function EventCard(props) {
         <Button variant="outlined" className={classes.button} href={"/#/parknride?event_id="+props.id+"&user_id=user"}>
             PARK AND RIDE
         </Button>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="Show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+        
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>

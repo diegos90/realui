@@ -12,7 +12,7 @@ const Menu = [
     pathname: "/gallery"
   },
   {
-    label: "GigGuide",
+    label: "Gig Guide",
     pathname: "/gigguide"
   },
   {

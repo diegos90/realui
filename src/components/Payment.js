@@ -61,9 +61,9 @@ function Payment(props) {
                 />
                 
 
-                <form action="https://sandbox.payfast.co.za/eng/process" name="form_e7773ab5244c47e4781146f01ca155b3" method="post">
+                <form action="https://www.payfast.co.za/eng/process" name="form_e7773ab5244c47e4781146f01ca155b3" method="post">
                   <input type="hidden" name="cmd" value="_paynow" />
-                  <input type="hidden" name="receiver" value="10009597" />
+                  <input type="hidden" name="receiver" value="14805769" />
                   <input type="hidden" name="item_name" value="NiteLifePartyTrip" />
                   <input type="hidden" name="amount" value={props.bookingInfo.price} />
                   <input type="hidden" name="item_description" value="" />

@@ -43,8 +43,17 @@ const styles = theme => ({
     display: 'inline-block',
     marginLeft: 32,
     paddingLeft: 24,
-    [theme.breakpoints.up('md')]: {
-      paddingTop: '1.5em'
+    [theme.breakpoints.down('md')]: {
+      paddingTop: '1.5em',
+      position: 'relative',
+      marginRight: 32,
+      position: '-webkit-sticky',
+      position: 'sticky'
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '1.5em',
+      position: 'relative'
+
     },
     position: 'absolute'
   },
@@ -58,7 +67,8 @@ const styles = theme => ({
   iconContainer: {
     display: 'none',
     [theme.breakpoints.down('sm')]: {
-      display: 'block'
+      display: 'block',
+      left:0
     }
   },
   iconButton: {

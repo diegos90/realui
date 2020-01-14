@@ -19,6 +19,7 @@ import { CircularProgress } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
+import moment from 'moment';
 
 import {
   MuiPickersUtilsProvider,
@@ -221,7 +222,7 @@ function ParkNRideInfo(props) {
                     <MenuItem key={index} value={key}>
                         <Paper>
                           <Button variant="contained" color="primary" className={classes.selectOptionButton}>
-                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{key.datetime}
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{moment(key.datetime).format("llll")}
                           </Button>
                           <Typography component="p" className={classes.selectOptionIcon}>
                             <LocationOnIcon />
@@ -254,7 +255,7 @@ function ParkNRideInfo(props) {
                     <MenuItem key={index} value={key}>
                         <Paper>
                           <Button variant="contained" color="primary" className={classes.selectOptionButton}>
-                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{key.datetime}
+                          <AccessTimeIcon className={classes.extendedIcon}/> &nbsp;{moment(key.datetime).format("llll")}
                           </Button>
                           <Typography component="p" className={classes.selectOptionIcon}>
                             <LocationOnIcon />

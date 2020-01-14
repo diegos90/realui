@@ -13,6 +13,7 @@ import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import moment from 'moment';
 
 const useStyles = makeStyles => (theme => ({
   card: {
@@ -59,7 +60,7 @@ function EventCard(props) {
           </IconButton>
         }
         title={props.title}
-        subheader={props.date}
+        subheader={moment(props.date).format("llll")}
       />
       <CardMedia
         className={classes.media}

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { TwitterTimelineEmbed} from 'react-twitter-embed';
 
 import Topbar from '../../components/Topbar';
+import { fontWeight } from '@material-ui/system';
 
 const numeral = require('numeral');
 numeral.defaultFormat('0,000');
@@ -43,7 +44,7 @@ const styles = theme => ({
   },
   clientLogo: {
     display: 'block',
-    width: 60,
+    width: 100,
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: 20
@@ -109,6 +110,9 @@ const styles = theme => ({
     textAlign: 'center',
     marginTop: theme.spacing.unit * 4,
     marginBottom: theme.spacing.unit * 4
+  },
+  paragraph:{
+    paddingBottom: 30
   }
 });
 
@@ -196,19 +200,19 @@ class OurStory extends Component {
                 <Grid container justify="center">
                   <Grid item md={8}>
 
-                    <Typography component="p">
+                    <Typography component="p" className={classes.paragraph} style={{marginTop:20}}> 
                       A Pretoria student project which transformed into a Rockstar solution to DUI-Free memories.
                       We began with one Party Cab in Pretoria to a network that stretches all over Gauteng offering:
                     </Typography>
-                    <Typography component="p">- Party Cabs: A vehicle equipped with sound for a large group of friends, family and colleauges</Typography>
-                    <Typography component="p">- Park N Ride:  Vehicles that assist with patron logistics i.e. from VIP Parking areas to Event location, this is offered to 
+                    <Typography component="p" className={classes.paragraph}>- Party Cabs: A vehicle equipped with sound for a large group of friends, family and colleauges</Typography>
+                    <Typography component="p" className={classes.paragraph}>- Park N Ride:  Vehicles that assist with patron logistics i.e. from VIP Parking areas to Event location, this is offered to 
                         event promoters and event goers who would like to carpool with others to the same destination.
                     </Typography>
-                    <Typography>For best turnaround on quotes and comfirmations, please use our intergrated booking system for instant price esitmates and payments - feel free to contact us for more information</Typography>
+                    <Typography className={classes.paragraph}>For best turnaround on quotes and comfirmations, please use our intergrated booking system for instant price esitmates and payments - feel free to contact us for more information</Typography>
                   </Grid>
                   <Grid item md={4}>
-                    <Paper style={{backgroundColor: '#fff', marginTop: 20}}>
-                      <Typography variant="h7" component="h7" align="center">
+                    <Paper style={{backgroundColor: '#fff', marginTop: 20, textAlign: 'center', height:'100%'}}>
+                      <Typography variant="h7" component="h7" align="center" style={{fontWeight:'bold'}}>
                         Our Clients
                       </Typography>
                         {clientList}
@@ -219,8 +223,8 @@ class OurStory extends Component {
             </Grid>
             <Grid md={4}>
               <Paper className={classes.paper}>
-                <Paper className={classes.paperHeader}>
-                  <Typography variant="h7" component="h7" align="center">
+                <Paper className={classes.paperHeader} style={{textAlign: 'center'}}>
+                  <Typography variant="h7" component="h7" align="center" style={{fontWeight:'bold'}}>
                     Contact Us
                   </Typography>
                   <Typography component="p" align="center">

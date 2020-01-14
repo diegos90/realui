@@ -14,6 +14,7 @@
     "clsx": "^1.0.4",
     "date-fns": "^2.0.0-alpha.34",
     "gh-pages": "^2.0.1",
+    "moment": "^2.24.0",
     "mui-places-autocomplete": "^2.0.0",
     "numeral": "^2.0.6",
     "query-string": "^6.2.0",

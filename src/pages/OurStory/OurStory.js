@@ -8,9 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Months from '../../components/common/Months';
 import axios from 'axios';
 import { TwitterTimelineEmbed} from 'react-twitter-embed';
-
 import Topbar from '../../components/Topbar';
 import { fontWeight } from '@material-ui/system';
+const facebook = require('../../images/facebook.png');
+const instagram = require('../../images/instagram.png');
+const twitter = require('../../images/twitter.png');
+const message = require('../../images/message.png');
 
 const numeral = require('numeral');
 numeral.defaultFormat('0,000');
@@ -238,6 +241,13 @@ class OurStory extends Component {
                     screenName="NitelifePartyCa"
                     options={{height:300}}
                   />
+
+                  <div>
+                    <img src={facebook} width={20} style={{paddingTop: 10, marginRight:10}}/>
+                    <img src={instagram} width={20} style={{paddingTop: 10, marginRight:10}}/>
+                    <img src={twitter} width={20} style={{paddingTop: 10, marginRight:10}}/>
+                    <img src={message} width={20} style={{paddingTop: 10, marginRight:10}}/>
+                  </div>
                 </Paper>
               </Paper>
             </Grid>

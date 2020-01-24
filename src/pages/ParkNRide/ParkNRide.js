@@ -13,6 +13,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ParkNRideInfo from '../../components/ParkNRideInfo';
 import axios from 'axios';
 import queryString from 'query-string';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const backgroundShape = require('../../images/mainBackground.png');
 const useStyles = makeStyles(theme => ({
@@ -38,6 +41,17 @@ const useStyles = makeStyles(theme => ({
   },
   navigationButtons: {
     backgroundColor: 'green'
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   }
 }));
 
@@ -74,6 +88,7 @@ export default function ParkNRide(props) {
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
   const [skipped, setSkipped] = React.useState(new Set());
 
  
@@ -119,6 +134,14 @@ export default function ParkNRide(props) {
     }
   }
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const nextButtonContent = ["Make Booking", "Make Payment", "Next..."]
   const steps = getSteps();
 
@@ -127,6 +150,9 @@ export default function ParkNRide(props) {
   }
 
   function handleNext() {
+    if(parkNRideInfo.termsAndConditionsChecked !=true)
+      handleOpen()
+    else{
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -138,6 +164,7 @@ export default function ParkNRide(props) {
       
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);
+  }
   }
 
   function handleBack() {
@@ -203,6 +230,26 @@ export default function ParkNRide(props) {
         )}
       </div>
         </div>
+
+        <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title"></h2>
+            <p id="transition-modal-description">Please indicate that you have read and agree to the terms and conditions</p>
+          </div>
+        </Fade>
+      </Modal>
         </div>
     </React.Fragment>
     )

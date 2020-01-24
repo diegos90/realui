@@ -11,6 +11,9 @@ import Payment from '../../components/Payment';
 import Topbar from '../../components/Topbar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 const backgroundShape = require('../../images/mainBackground.png');
 
@@ -38,6 +41,17 @@ const useStyles = makeStyles(theme => ({
   },
   informationForm:{
     backgroundColor: 'white',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   }
 }));
 
@@ -56,7 +70,7 @@ const bookingInfo = {
   vehicleType: '',
   trailerRequired: null,
   type: 'booknow',
-  termsAndConditionsChecked: null
+  termsAndConditionsChecked: null,
 }
 
 function getSteps() {
@@ -66,7 +80,7 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-        return <BookingInfo bookingInfo={bookingInfo}/>;
+        return <BookingInfo bookingInfo={bookingInfo} />;
     case 1:   
         return <Quote bookingInfo={bookingInfo} />;
     case 2:
@@ -81,6 +95,7 @@ export default function Booking() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const [open, setOpen] = React.useState(false);
   const nextButtonContent = ["Generate Quote", "Make Payment"]
   const steps = getSteps();
 
@@ -89,6 +104,9 @@ export default function Booking() {
   }
 
   function handleNext() {
+    if(bookingInfo.termsAndConditionsChecked !=true)
+      handleOpen()
+    else{
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());
@@ -101,11 +119,19 @@ export default function Booking() {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);
   }
+  }
 
   function handleBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   }
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function handleReset() {
     setActiveStep(0);
@@ -118,7 +144,7 @@ export default function Booking() {
           console.log("done")
         })
   }
-  
+
   return (
     <React.Fragment>
     <CssBaseline />
@@ -172,6 +198,27 @@ export default function Booking() {
         )}
       </div>
         </div>
+
+        <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title"></h2>
+            <p id="transition-modal-description">Please indicate that you have read and agree to the terms and conditions</p>
+          </div>
+        </Fade>
+      </Modal>
+
         </div>
     </React.Fragment>
     )

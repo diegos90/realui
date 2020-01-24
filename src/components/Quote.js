@@ -74,7 +74,7 @@ function Quote(props) {
                         <Typography variant="h5" component="h3">
                           Your Party Cab quote is: 
                         </Typography>
-                        <Typography component="p">
+                        {/*<Typography component="p">
                           Billed to: {props.bookingInfo.name}
                         </Typography>
                         <Typography component="p">
@@ -85,7 +85,7 @@ function Quote(props) {
                         </Typography> 
                         <Typography component="p">
                           Return: {quote.returnTrip.distance}
-                        </Typography>
+            </Typography>*/}
                         <Typography variant="h4" component="h3" className={classes.price}>
                         R {formatMoney(quote.price)}
                         </Typography>

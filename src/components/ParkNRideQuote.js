@@ -73,13 +73,13 @@ function ParkNRideQuote(props) {
                         <Typography variant="h5" component="h3">
                           Your ParkNRide quote is: 
                         </Typography>
-                        <Typography component="p">
+                        {/*<Typography component="p">
                           Billed to: {props.bookingInfo.name}
                         </Typography>
                         <Typography component="p">
                           Email: {props.bookingInfo.email}
                         </Typography>
-                        {/*<Typography component="p">
+                        <Typography component="p">
                           Departure: {quote.departureTrip.distance}
                         </Typography> 
                         <Typography component="p">

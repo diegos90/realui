@@ -94,6 +94,8 @@ function BookingInfo(props) {
         console.log(error);
       })
 
+
+  console.log(props.bookingInfo.errors)
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
     props.bookingInfo[name] = event.target.value;
@@ -375,15 +377,15 @@ function BookingInfo(props) {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value="NLSTUDIO">NL STUDIO</MenuItem>
-                    <MenuItem value="NLSTUDIOXL">NL STUDIO XL</MenuItem>
-                    <MenuItem value="NLSUPERSTAR">NL SUPERSTAR</MenuItem>
+                    <MenuItem value="NLSTUDIO">NL STUDIO - 14 Seater</MenuItem>
+                    <MenuItem value="NLSTUDIOXL">NL STUDIO XL - 22 Seater </MenuItem>
+                    <MenuItem value="NLSUPERSTAR">NL SUPERSTAR - Luxury 6 Seater</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl variant="outlined" className={classes.formControl}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={values.trailerRequired} onChange={handleTrailerRequiredChecked('trailerRequired')} value="trailerRequired" color="primary"/>
+                    <Checkbox checked={props.bookingInfo.trailerRequired} onChange={handleTrailerRequiredChecked('trailerRequired')} value="trailerRequired" color="primary"/>
                   }
                   label="Trailer required?"
                   id="trailerRequired"
@@ -393,7 +395,7 @@ function BookingInfo(props) {
                 <FormControl variant="outlined" className={classes.formControl}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={values.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
+                    <Checkbox checked={props.bookingInfo.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
                   }
                   label={<Link href={termsAndConditionsURL} target="_blank" rel="noopener" >
                           I have read and agree to the <u>Terms and Conditions</u>
@@ -403,6 +405,7 @@ function BookingInfo(props) {
                 </FormControl>
                 
             </Grid>
+            
         </Grid>
         </MuiPickersUtilsProvider>
   );

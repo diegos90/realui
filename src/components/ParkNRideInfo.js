@@ -287,7 +287,7 @@ function ParkNRideInfo(props) {
                 <FormControl variant="outlined" className={classes.formControl}>
                 <FormControlLabel
                   control={
-                    <Checkbox checked={values.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
+                    <Checkbox checked={props.bookingInfo.termsAndConditionsChecked} onChange={handleTermsAndConditionsChecked('termsAndConditionsChecked')} value="termsAndConditionsChecked" color="primary"/>
                   }
                   label={<Link href={termsAndConditionsURL} target="_blank" rel="noopener" >
                           I have read and agree to the <u>Terms and Conditions</u>

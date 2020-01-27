@@ -244,8 +244,8 @@ class OurStory extends Component {
 
                   <div>
                     <a href="https://www.facebook.com/nitelifepartycabs" target="_blank"><img src={facebook} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
-                    <a href="https://www.instagram.com/nitelifepartyca" target="_blank"><img src={instagram} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
-                    <a href="https://www.twitter.com/nitelifepartycabs" target="_blank"><img src={twitter} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
+                    <a href="https://www.instagram.com/nitelifepartycabs" target="_blank"><img src={instagram} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
+                    <a href="https://www.twitter.com/nitelifepartyca" target="_blank"><img src={twitter} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
                     <a href="mailto:info@nitelifepartycabs.co.za" target="_blank"><img src={message} width={20} style={{paddingTop: 10, marginRight:10}}/></a>
                   </div>
                 </Paper>
